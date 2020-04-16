@@ -1,0 +1,177 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+const app = require('../app');
+const debug = require('debug')('bcdv1008-finalproject:server');
+const http = require('http');
+const mongoose = require('mongoose');
+
+const ioDB = require('../db/io');
+const formatMessage = require('../exports/messages');
+const {
+  userJoin,
+  getCurrentUser,
+  userLeave,
+  getRoomUsers
+} = require('../exports/users');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+const io = require("socket.io")(server)
+
+// New connection 
+io.on('connection', socket => {
+  console.log('Connected...');
+
+  socket.on('connected', ({ username }) => {
+    ioDB.historySocketCreate(username, null, "new socket connection", Date.now());
+  });
+
+  socket.on('disconnected', ({ username }) => {
+    console.log(username);
+    ioDB.historySocketCreate(username, null, "socket disconnection", Date.now());
+  });
+
+  socket.on('joinRoom', ({ username, room }) => {
+    const user = userJoin(socket.id, username, room);
+    socket.join(user.room);
+
+    ioDB.historySocketCreate(username, room, 'joined the room', Date.now());
+
+    // Current user
+    socket.emit('messageJoinLeft', formatMessage(username, 'Welcome to Chat'));
+
+    // Broadcast when a user connects
+    socket.broadcast
+      .to(user.room)
+      .emit(
+        'messageJoinLeft',
+        formatMessage(user.username, ' joined the chat')
+      );
+
+    // Send users and room info
+    io
+      .to(user.room)
+      .emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room)
+      });
+  });
+
+  // Listen for chatMessage
+  socket.on('chatMessage', msg => {
+
+    ioDB.historyChatCreate(msg.user, mongoose.Types.ObjectId(msg.room), msg.msg, msg.date);
+
+    io
+      .to(msg.room)
+      .emit('message', formatMessage(msg.user, msg.msg));
+  });
+
+  // Runs when client disconnects
+  socket.on('disconnect', () => {
+    const user = userLeave(socket.id);
+
+    if (user) {
+      socket.leave(user.room);
+      ioDB.historySocketCreate(user.username, user.room, 'has left the room', Date.now())
+
+      io
+        .to(user.room)
+        .emit(
+          'messageJoinLeft',
+          formatMessage(user.username, 'has left the room')
+        );
+
+      // Send users and room info
+      io
+        .to(user.room)
+        .emit('roomUsers', {
+          room: user.room,
+          users: getRoomUsers(user.room)
+        });
+    }
+  });
+});

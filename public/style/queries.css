@@ -1,0 +1,89 @@
+@import url("global.css");
+
+body {
+	background-color: #e5e5e5;
+	min-width: 350px;
+	min-height: 475px;
+	font-family: Roboto;
+
+	margin: 2em 3em;
+}
+
+.header-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	margin-bottom: 2em;
+}
+
+.header-container h2 {
+	font-size: 24px;
+	font-weight: bold;
+	color: #49289e;
+}
+
+.header-container button {
+	background-color: #eb1759;
+	border: none;
+	border-radius: 10px;
+
+	font-size: 16px;
+	font-weight: bold;
+	color: white;
+
+	margin-left: 1em;
+	padding: 0 1em;
+	height: 40px;
+
+	transition: 0.3s;
+}
+
+.header-container button:hover {
+	transform: translate(0%, 5%) scale(1.05);
+	cursor: pointer;
+}
+
+.history-container {
+	display: flex;
+	justify-content: center;
+
+	padding: 0 0.5em;
+
+	overflow: auto;
+	overflow-y: scroll;
+	height: 80vh;
+}
+
+.history-container::-webkit-scrollbar {
+	width: 0.3em;
+	height: 0.3em;
+}
+
+.history-container::-webkit-scrollbar-thumb {
+	background-color: #eb1759;
+}
+
+.history-container::-webkit-scrollbar-corner {
+	background-color: none;
+}
+
+.history-table {
+    border-collapse: collapse;
+}
+
+.history-table th, td {
+	padding: 0.4em;
+	text-align: center;
+
+    background-color: transparent;    
+    border-bottom: 1px solid;
+    border-color: rgba(235, 25, 92, 0.50);
+    outline: none;
+}
+
+@media screen and (max-width: 1200px) {
+	body {
+		margin: 2em 1em;
+	}
+}
