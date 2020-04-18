@@ -16,4 +16,5 @@ $(document).ready(() => {
 
     // TODO Delete token when logout
     // https://stackoverflow.com/questions/2144386/how-to-delete-a-cookie
+    // https://www.npmjs.com/package/react-cookie
 })

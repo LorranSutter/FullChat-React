@@ -1,6 +1,7 @@
 const async = require('async');
 const moment = require('moment');
 
+const admin = require('./models/admin');
 const room = require('./models/room');
 const HistoryChat = require('./models/HistoryChat');
 const HistorySocket = require('./models/HistorySocket');
@@ -87,6 +88,17 @@ function randomDate(start, end) {
 
 function randomInt(start, end) {
     return parseInt(Math.random() * (end + 1 - start) + start)
+}
+
+function adminCreate(login, password) {
+    let newAdmin = new admin({ login, password });
+
+    newAdmin.save(function (err) {
+        if (err) {
+            throw err;
+        }
+        console.log('Admin created: ' + newAdmin.login);    
+    });
 }
 
 function roomCreate(name, cb) {
@@ -180,6 +192,8 @@ function populateHistorySocket(cb) {
 
     async.parallel(historySocketCreateArray, cb);
 }
+
+adminCreate('admin', 'admin');
 
 async.series([
     populateRooms,
