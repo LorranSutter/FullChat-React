@@ -6,4 +6,7 @@ $(document).ready(() => {
     $('#change-username').on('click', () => {
         socket.emit('disconnected', { username });
     });
+
+    // TODO Delete token when change room
+    // https://stackoverflow.com/questions/2144386/how-to-delete-a-cookie
 });

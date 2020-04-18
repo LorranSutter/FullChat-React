@@ -13,4 +13,7 @@ $(document).ready(() => {
                 alert("error");
             });
     });
+
+    // TODO Delete token when logout
+    // https://stackoverflow.com/questions/2144386/how-to-delete-a-cookie
 })

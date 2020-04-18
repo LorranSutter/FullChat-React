@@ -30,6 +30,8 @@ $(document).ready(() => {
 
     $('#getStarted').on('click', () => {
         const username = $('#username').val();
-        socket.emit('connected', { username });
+        if (username) {
+            socket.emit('connected', { username });
+        }
     });
 })

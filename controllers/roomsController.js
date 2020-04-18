@@ -13,6 +13,11 @@ exports.index = async (req, res, next) => {
 
 exports.roomsLogin = async (req, res, next) => {
     const username = req.body.username;
+
+    if (!username) {
+        res.status(401).render('error', { message: 'Invalid username' });
+    }
+
     const avatar = `https://avatars.dicebear.com/v2/gridy/${username}.svg?options[width][]=500&options[height][]=500`;
 
     res.cookie('username', username);

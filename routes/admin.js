@@ -1,11 +1,14 @@
 const router = require('express').Router();
 
 const adminController = require('../controllers/adminController');
+const adminMiddleware = require('../middlewares/adminAuth');
 
-router.get('/', adminController.index);
+router.get('/', adminMiddleware.checkLogin, adminController.index);
 
-router.get('/partialHistory', adminController.partialHistory);
+router.post('/', adminMiddleware.newLogin, adminController.index);
 
-router.get('/socketEvents', adminController.socketEvents);
+router.get('/partialHistory', adminMiddleware.checkLogin, adminController.partialHistory);
+
+router.get('/socketEvents', adminMiddleware.checkLogin, adminController.socketEvents);
 
 module.exports = router;
