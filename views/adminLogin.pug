@@ -2,17 +2,18 @@ extends layout
 
 block head-content
     link(rel="stylesheet" href="/style/adminLogin.css")
-    //- script(src="/js/adminLogin.js")
+    script(src="/js/adminLogin.js")
 
 block content
     div(class="login-container")
         div(class="content")
             div(class="content-items")
-                div(class="side-container")
-                    form(action="/rooms", method="post" class="form")
-                        h1 Full Chat
-                        input(type="text" name="username" id="username" placeholder="Username")
-                        a(href="rooms")
-                            button(id="getStarted") Get Started
-                    a(href="admin" class="admin-page")
-                        button Admin
+                form(action="/admin", method="get" class="form")
+                    h1 Admin Login
+                    input(type="text" name="username" id="username" placeholder="Username")
+                    input(type="password" name="password" id="username" placeholder="Password")
+                    div(class="buttons")
+                        a(href="#")
+                            button(id="login") Login
+                        a(href="/")
+                            button(id="cancel") Cancel
