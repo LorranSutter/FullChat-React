@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Login from './pages/Login';
+import LoginAdmin from './pages/LoginAdmin';
 import Rooms from './pages/Rooms';
 import Chat from './pages/Chat';
 
@@ -10,6 +11,7 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact component={Login} />
+        <Route path='/loginAdmin' component={LoginAdmin} />
         <Route path='/rooms' component={Rooms} />
         <Route path='/chat' component={Chat} />
       </Switch>

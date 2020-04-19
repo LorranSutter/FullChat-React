@@ -1,0 +1,128 @@
+@import url("../../global.css");
+
+body {
+	background-color: #f3f3f3;
+}
+
+.login-admin-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-admin-container .content {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	padding: 3em;
+
+	min-width: 350px;
+    min-height: 350px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	background: #49289e;
+	border-radius: 25px;
+}
+
+.login-admin-container .content-items {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+
+	height: 100%;
+}
+
+.login-admin-container .content .form {
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-columns: 1fr;
+	gap: 0.5em;
+	align-items: center;
+	height: 75%;
+}
+
+.login-admin-container .content .form * {
+	text-align: center;
+	width: 100%;
+}
+
+.login-admin-container .content .form h1 {
+	grid-row: 1/3;
+	color: #f3f3f3;
+	font-family: Rubik;
+	font-size: 36px;
+	font-weight: normal;
+}
+
+.login-admin-container .content .form input::placeholder {
+	opacity: 60%;
+}
+.login-admin-container .content .form input {
+	width: 300px;
+	height: 70px;
+	padding-left: 0.4em;
+
+	font-family: Roboto;
+	font-size: 24px;
+	text-align: left;
+	background: #e4e4e4;
+	border-radius: 10px;
+	border: none;
+}
+
+.login-admin-container .content .form a {
+	width: 145px;
+}
+
+.login-admin-container .content .form button {
+	height: 70px;
+
+	color: #642feb;
+	background: #96eb24;
+	font-family: Roboto;
+	font-weight: bold;
+	font-size: 24px;
+	border-radius: 10px;
+	border: none;
+
+	transition: 0.3s;
+}
+
+.login-admin-container .content .form button:hover {
+	transform: translate(0%, 5%) scale(1.05);
+	cursor: pointer;
+}
+
+.login-admin-container .content .form .buttons {
+	display: flex;
+	justify-content: space-between;
+}
+
+@media screen and (max-width: 1350px) {
+	.login-admin-container .content-items {
+		flex-direction: column;
+
+		width: 80%;
+		height: 90%;
+    }
+    
+    .login-admin-container .content .form h1 {
+        grid-row: unset;
+    }
+}
+
+@media screen and (max-width: 400px) {
+	.login-admin-container .content {
+		width: 100%;
+		border-radius: unset;
+	}
+	
+	.login-admin-container .content .side-container input,
+	.login-admin-container .content .side-container button {
+		width: 250px;
+	}
+}

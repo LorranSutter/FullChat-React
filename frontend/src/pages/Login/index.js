@@ -3,9 +3,11 @@ import React from 'react';
 import './styles.css'
 
 const Login = () => {
+
+    // FIXME Override css
+
     return (
         <div className="login-container">
-            <h1>Login</h1>
             <div className="content">
                 <div className="content-items">
                     <div className="avatar">
@@ -21,7 +23,7 @@ const Login = () => {
                                 <button id="getStarted">Get Started</button>
                             </a>
                         </form>
-                        {/* TODO href="adminLogin" */}
+                        {/* TODO href="loginAdmin" */}
                         <a href="#" className="admin-page">
                             <button>Admin</button>
                         </a>
