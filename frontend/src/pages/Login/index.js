@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import './styles.css'
+import styles from './styles.module.css'
 
 const Login = () => {
 
-    // FIXME Override css
+    useEffect(() => {
+        document.body.style.backgroundColor = "#49289e";
+    }, []);
 
     return (
-        <div className="login-container">
-            <div className="content">
-                <div className="content-items">
-                    <div className="avatar">
+        <div className={styles.login_container}>
+            <div className={styles.content}>
+                <div className={styles.content_items}>
+                    <div className={styles.avatar}>
                         <img src="#" alt="avatar" id="avatarImg" />
                     </div>
-                    <div className="side-container">
+                    <div className={styles.side_container}>
                         {/* TODO action="/rooms" */}
-                        <form action="#" method="post" class="form">
+                        <form action="#" method="post" class={styles.form}>
                             <h1>Full Chat</h1>
                             <input type="text" name="username" id="username" placeholder="Username" />
                             {/* TODO href="rooms" */}
@@ -24,7 +26,7 @@ const Login = () => {
                             </a>
                         </form>
                         {/* TODO href="loginAdmin" */}
-                        <a href="#" className="admin-page">
+                        <a href="#" className={styles.admin_page}>
                             <button>Admin</button>
                         </a>
                     </div>

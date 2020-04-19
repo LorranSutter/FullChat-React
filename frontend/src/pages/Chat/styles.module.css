@@ -1,13 +1,6 @@
 @import url("../../global.css");
 
-body {
-	background-color: #e5e5e5;
-	min-width: 350px;
-    min-height: 475px;
-    font-family: Roboto;
-}
-
-.header-container {
+.header_container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -15,13 +8,13 @@ body {
 	margin: 2em 5em;
 }
 
-.header-container h2 {
+.header_container h2 {
 	font-size: 24px;
 	font-weight: bold;
 	color: #49289e;
 }
 
-.header-container button {
+.header_container button {
 	width: 175px;
 	height: 50px;
 
@@ -35,12 +28,12 @@ body {
 	transition: 0.3s;
 }
 
-.header-container button:hover {
+.header_container button:hover {
 	transform: translate(0%, 5%) scale(1.05);
 	cursor: pointer;
 }
 
-.chat-container {
+.chat_container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -51,7 +44,7 @@ body {
 	margin: 0 5em;
 }
 
-.chat-container .chat-list-container {
+.chat_container .chat_list_container {
 	height: 90%;
     width: 100%;
 	
@@ -60,20 +53,20 @@ body {
     overflow-y: scroll;
 }
 
-.chat-container .chat-list-container::-webkit-scrollbar {
+.chat_container .chat_list_container::-webkit-scrollbar {
 	width: 0.3em;
 	height: 0.3em;
 }
 
-.chat-container .chat-list-container::-webkit-scrollbar-thumb {
+.chat_container .chat_list_container::-webkit-scrollbar-thumb {
 	background-color: #eb1759;
 }
 
-.chat-container .chat-list-container::-webkit-scrollbar-corner {
+.chat_container .chat_list_container::-webkit-scrollbar-corner {
 	background-color: none;
 }
 
-.chat-container .chat-list-container .chat-msg {
+.chat_container .chat_list_container .chat_msg {
 	display: flex;
 	align-items: center;
 
@@ -86,20 +79,20 @@ body {
 	border-radius: 10px;	
 }
 
-.chat-container .chat-list-container .chat-msg:nth-of-type(even) {
+.chat_container .chat_list_container .chat_msg:nth-of-type(even) {
 	border: 1.5px solid #eb1759;
 }
 
-.chat-container .chat-list-container .chat-msg:nth-of-type(odd) {
+.chat_container .chat_list_container .chat_msg:nth-of-type(odd) {
 	border: 1.5px solid #49289e;
 }
 
-.chat-container .chat-list-container .chat-msg img {
+.chat_container .chat_list_container .chat_msg img {
     max-height: 50px;
     align-self: flex-start;
 }
 
-.chat-container .chat-list-container .chat-msg .username-msg-wrapper {
+.chat_container .chat_list_container .chat_msg .username_msg_wrapper {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -111,12 +104,12 @@ body {
 	margin: 0 1em;
 }
 
-.chat-container .chat-list-container .chat-msg .username-msg {
+.chat_container .chat_list_container .chat_msg .username_msg {
 	font-weight: bold;
 	font-style: italic;
 }
 
-.chat-container .chat-list-container .chat-msg .timestamp-msg {
+.chat_container .chat_list_container .chat_msg .timestamp_msg {
 	display: flex;
 	flex-direction: column;
 
@@ -128,7 +121,7 @@ body {
 	text-align: right;
 }
 
-.chat-container .chat-list-container .user-join-left {
+.chat_container .chat_list_container .user-join-left {
 	display: flex;
 	align-items: center;
 
@@ -143,28 +136,28 @@ body {
     font-style: italic;
 }
 
-/* .chat-container .input-msg-container {
+/* .chat_container .input_msg_container {
 	flex-grow: 1;
 } */
 
-.chat-container .input-msg-container {
+.chat_container .input_msg_container {
     width: 100%;
 }
 
-.chat-container .input-msg-container > p {
+.chat_container .input_msg_container > p {
     color: #4E4E4E;
     font-style: italic;
     padding: 0.2em 0.6em;
 }
 
-.chat-container .input-msg-container .chat-form {
+.chat_container .input_msg_container .chat_form {
     display: flex;
     align-items: center;
 
     width: 100%;
 }
 
-.chat-container .input-msg-container .chat-form input {
+.chat_container .input_msg_container .chat_form input {
     width: 100%;
 
     margin-right: 1em;
@@ -174,7 +167,7 @@ body {
     border-radius: 5px;
 }
 
-.chat-container .input-msg-container .chat-form button {
+.chat_container .input_msg_container .chat_form button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -194,25 +187,25 @@ body {
 	transition: 0.2s;
 }
 
-.chat-container .input-msg-container .chat-form button:hover {
+.chat_container .input_msg_container .chat_form button:hover {
 	transform: scale(1.05);
 }
 
 @media screen and (max-width: 900px) {
-	.header-container {
+	.header_container {
 		margin: 1em 1em;
 	}
 
-	.chat-container {
+	.chat_container {
         margin: 0 1em 1em 1em;
         height: 85vh;
     }
     
-    .chat-container .chat-list-container .chat-msg img {
+    .chat_container .chat_list_container .chat_msg img {
         max-height: 30px;
     }
 
-    .chat-container .chat-list-container .chat-msg .timestamp-msg {
+    .chat_container .chat_list_container .chat_msg .timestamp_msg {
         min-width: 90px;
     }
 }
