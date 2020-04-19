@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './styles.css'
-import openedDoor from '../../img/opened-door.png';
+import Room from './room';
 
 const Login = () => {
     return (
@@ -21,20 +21,8 @@ const Login = () => {
             </header>
             <main className="rooms-container">
                 <ul className="rooms-list">
-                    {[1, 2, 3, 4, 5].map(x => (
-                        <li>
-                            <div className="room-data-container">
-                                <h2>Room Name</h2>
-                            </div>
-                            <div className="door-button-container">
-                                <a href="#">
-                                    <button>
-                                        <img src={openedDoor} alt="Get into the room" />
-                                        <span className="Enter">Enter</span>
-                                    </button>
-                                </a>
-                            </div>
-                        </li>
+                    {[1, 2, 3, 4, 5].map((x,key) => (
+                        <Room key={key} name="Room Name"></Room>
                     ))}
                 </ul>
             </main>
