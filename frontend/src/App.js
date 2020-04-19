@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Login from './pages/Login';
 import Rooms from './pages/Rooms';
+import Chat from './pages/Chat';
 
 export default function Routes() {
   return (
@@ -10,8 +11,7 @@ export default function Routes() {
       <Switch>
         <Route path='/' exact component={Login} />
         <Route path='/rooms' component={Rooms} />
-                {/* <Route path='/profile' component={Profile} />
-                <Route path='/incidents/new' component={NewIncident} /> */}
+        <Route path='/chat' component={Chat} />
       </Switch>
     </BrowserRouter>
   );
