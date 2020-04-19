@@ -10,7 +10,7 @@ const Login = () => {
                 <div className="avatar-container">
                     <div className="username-container">
                         <h2>Username</h2>
-                        {/* href="/" */}
+                        {/* TODO href="/" */}
                         <a href="#" id="change-username">
                             <button>Change Username</button>
                         </a>

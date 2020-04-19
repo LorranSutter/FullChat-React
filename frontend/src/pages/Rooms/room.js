@@ -10,7 +10,7 @@ const Room = (props) => {
                 <h2>{props.name}</h2>
             </div>
             <div className="door-button-container">
-                {/* href=`chat/${room.id}` */}
+                {/* TODO href=`chat/${room.id}` */}
                 <a href="#">
                     <button>
                         <img src={openedDoor} alt="Get into the room" />

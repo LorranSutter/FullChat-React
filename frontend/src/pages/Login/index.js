@@ -12,16 +12,16 @@ const Login = () => {
                         <img src="#" alt="avatar" id="avatarImg" />
                     </div>
                     <div className="side-container">
-                        {/* action="/rooms" */}
+                        {/* TODO action="/rooms" */}
                         <form action="#" method="post" class="form">
                             <h1>Full Chat</h1>
                             <input type="text" name="username" id="username" placeholder="Username" />
-                            {/* href="rooms" */}
+                            {/* TODO href="rooms" */}
                             <a href="#">
                                 <button id="getStarted">Get Started</button>
                             </a>
                         </form>
-                        {/* href="adminLogin" */}
+                        {/* TODO href="adminLogin" */}
                         <a href="#" className="admin-page">
                             <button>Admin</button>
                         </a>
