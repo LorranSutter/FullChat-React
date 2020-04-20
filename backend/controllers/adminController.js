@@ -11,15 +11,18 @@ exports.index = async (req, res, next) => {
 
     let userList = historyList.map(x => x.user);
     userList = [...new Set(userList)].sort()
+    const cookies = req.cookies;
 
-    res.render('admin',
-        {
-            title: 'Admin',
-            roomList: roomList,
-            userList: userList,
-            historyList: historyList
-        }
-    );
+    res.send({ cookies, roomList, userList, historyList });
+
+    // res.render('admin',
+    //     {
+    //         title: 'Admin',
+    //         roomList: roomList,
+    //         userList: userList,
+    //         historyList: historyList
+    //     }
+    // );
 }
 
 exports.partialHistory = async (req, res, next) => {
