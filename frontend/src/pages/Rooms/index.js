@@ -34,7 +34,7 @@ const Rooms = () => {
 
     // TODO emit socket.io change username
     // TODO clear cookies
-    function handleClickChangeUsername(e) {
+    function handleClick(e) {
         e.preventDefault();
 
         history.push('/');
@@ -46,7 +46,7 @@ const Rooms = () => {
                 <div className={styles.avatar_container}>
                     <div className={styles.username_container}>
                         <h2>Username</h2>
-                        <a id="change-username" onClick={handleClickChangeUsername}>
+                        <a id="change-username" onClick={handleClick}>
                             <button>Change Username</button>
                         </a>
                     </div>

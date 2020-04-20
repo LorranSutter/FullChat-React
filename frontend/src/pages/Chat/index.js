@@ -31,7 +31,7 @@ const Chat = ({ match }) => {
     }, []);
 
     // TODO emit socket.io leave room
-    function handleClickChangeRoom(e) {
+    function handleClick(e) {
         e.preventDefault();
 
         history.push('/rooms');
@@ -41,7 +41,7 @@ const Chat = ({ match }) => {
         <>
             <header className={styles.header_container}>
                 <h2>{roomName}</h2>
-                <a onClick={handleClickChangeRoom}>
+                <a onClick={handleClick}>
                     <button>Change Room</button>
                 </a>
             </header>
