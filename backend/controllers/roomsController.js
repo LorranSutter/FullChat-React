@@ -2,6 +2,24 @@ const room = require('../models/room');
 
 exports.index = async (req, res, next) => {
     const roomsList = await room.find();
+    res.send({ roomsList });
+}
+
+exports.roomsLogin = async (req, res, next) => {
+    const username = req.body.username;
+    const avatarUrl = req.body.avatarUrl;
+
+    const roomsList = await room.find();
+
+    res
+        .cookie('username', username, { httpOnly: true, signed: true })
+        .cookie('avatar', avatarUrl, { httpOnly: true, signed: true });
+
+    res.send({ roomsList });
+}
+
+exports.index_old = async (req, res, next) => {
+    const roomsList = await room.find();
     res.render('rooms',
         {
             title: 'Rooms',
@@ -11,7 +29,7 @@ exports.index = async (req, res, next) => {
         });
 }
 
-exports.roomsLogin = async (req, res, next) => {
+exports.roomsLogin_old = async (req, res, next) => {
     const username = req.body.username;
 
     if (!username) {

@@ -1,12 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import api from '../../services/api';
 
 import styles from './styles.module.css'
 import Room from './room';
 
-const Login = () => {
+const Rooms = () => {
+
+    const [rooms, setRooms] = useState([]);
+
 
     useEffect(() => {
-        document.body.style.minWidth = "350px";
+        document.body.style.backgroundColor = "#e5e5e5";
+        document.body.style.minWidth = "350px";        
+
+        try {
+            api.get('rooms', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+                //   'withCredentials':true
+            }).then(res => {
+                setRooms(res.data.roomsList);
+            })
+        } catch (error) {
+            alert('Fail to login! Try again.');
+        }
+
     }, []);
 
     return (
@@ -27,8 +48,8 @@ const Login = () => {
             </header>
             <main className={styles.rooms_container}>
                 <ul className={styles.rooms_list}>
-                    {[1, 2, 3, 4, 5].map((x, key) => (
-                        <Room key={key} name="Room Name"></Room>
+                    {rooms.map(room => (
+                        <Room key={room._id} name={room.name}></Room>
                     ))}
                 </ul>
             </main>
@@ -36,4 +57,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Rooms;
