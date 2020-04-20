@@ -6,6 +6,7 @@ import Message from './message';
 const Chat = () => {
 
     useEffect(() => {
+        document.body.style.backgroundColor = "#e5e5e5";
         document.body.style.minWidth = "350px";
         document.body.style.minHeight = "475px";
     }, []);
@@ -32,7 +33,7 @@ const Chat = () => {
                 </div>
                 <div className={styles.input_msg_container}>
                     <form action="#" id="chat-form" className={styles.chat_form}>
-                        <input type="text" name={styles.msg} id="msg" placeholder="Write your message..." autocomplete="off" />
+                        <input type="text" name={styles.msg} id="msg" placeholder="Write your message..." autoComplete="off" />
                         <button>Send</button>
                     </form>
                 </div>
