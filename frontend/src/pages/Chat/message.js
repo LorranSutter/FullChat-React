@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import styles from './styles.module.css';
 
@@ -14,11 +15,8 @@ const Message = (props) => {
                 <span className={styles.msg}>{props.msg}</span>
             </div>
             <div className={styles.timestamp_msg}>
-                {/* TODO Include moment format */}
-                {/* moment(msg.date).format('MMM Do YY') */}
-                <span>{props.date}</span>
-                {/* moment(msg.date).format('hh:mm:ss a') */}
-                <span>{props.date}</span>
+                <span>{moment(props.date).format('MMM Do YY')}</span>
+                <span>{moment(props.date).format('hh:mm:ss a')}</span>
             </div>
         </div>
     );
