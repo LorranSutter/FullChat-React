@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import styles from './styles.module.css'
 
 const LoginAdmin = () => {
+
+    const history = useHistory();
+
+    useEffect(() => {
+        document.body.style.backgroundColor = "#e5e5e5";
+    }, []);
+
     return (
         <div className={styles.login_container}>
             <div className={styles.content}>
@@ -18,11 +26,11 @@ const LoginAdmin = () => {
                                     Login
                                 </button>
                             </a>
-                            <a href="#">
+                            <Link to="/">
                                 <button id="buttonCancel">
                                     Cancel
                                 </button>
-                            </a>
+                            </Link>
                         </div>
                     </form>
                 </div>
