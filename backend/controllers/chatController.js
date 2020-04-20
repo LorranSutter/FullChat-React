@@ -12,11 +12,13 @@ exports.index = async (req, res, next) => {
 
     res.cookie('roomId', req.params.roomId);
 
-    res.render('chat',
-        {
-            title: 'Chat',
-            room: chatRoom,
-            msgList: msgList
-        }
-    );
+    res.send({ chatRoom, msgList });
+
+    // res.render('chat',
+    //     {
+    //         title: 'Chat',
+    //         room: chatRoom,
+    //         msgList: msgList
+    //     }
+    // );
 }

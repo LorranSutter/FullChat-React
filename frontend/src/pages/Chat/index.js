@@ -1,33 +1,58 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import api from '../../services/api';
 
 import styles from './styles.module.css'
 import Message from './message';
 
-const Chat = () => {
+const Chat = ({ match }) => {
+
+    const [roomName, setRoomName] = useState('');
+    const [msgList, setMsgList] = useState([]);
+
+    const history = useHistory();
 
     useEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
         document.body.style.minWidth = "350px";
         document.body.style.minHeight = "475px";
+
+        api
+            .get(`/chat/${match.params.roomId}`)
+            .then(res => {
+                console.log('chat response');
+                console.log(res);
+
+                setRoomName(res.data.chatRoom.name);
+                setMsgList(res.data.msgList)
+            });
+
     }, []);
+
+    // TODO emit socket.io leave room
+    function handleClickChangeRoom(e) {
+        e.preventDefault();
+
+        history.push('/rooms');
+    }
 
     return (
         <>
             <header className={styles.header_container}>
-                <h2>Room Name</h2>
-                {/* TODO href="/rooms" */}
-                <a href="#">
+                <h2>{roomName}</h2>
+                <a onClick={handleClickChangeRoom}>
                     <button>Change Room</button>
                 </a>
             </header>
             <main className={styles.chat_container}>
                 <div className={styles.chat_list_container}>
-                    {[1, 2, 3, 4, 5].map((x, key) => (
+                    {msgList.map(msg => (
                         <Message
-                            key={key}
-                            user='Username'
-                            msg='Message'
-                            date='Some date'
+                            key={msg._id}
+                            user={msg.user}
+                            msg={msg.message}
+                            date={msg.date}
                         ></Message>
                     ))}
                 </div>

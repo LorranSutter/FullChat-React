@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 
@@ -9,6 +10,7 @@ const Rooms = () => {
 
     const [rooms, setRooms] = useState([]);
 
+    const history = useHistory();
 
     useEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
@@ -30,14 +32,21 @@ const Rooms = () => {
 
     }, []);
 
+    // TODO emit socket.io change username
+    // TODO clear cookies
+    function handleClickChangeUsername(e) {
+        e.preventDefault();
+
+        history.push('/');
+    }
+
     return (
         <>
             <header className={styles.header_container}>
                 <div className={styles.avatar_container}>
                     <div className={styles.username_container}>
                         <h2>Username</h2>
-                        {/* TODO href="/" */}
-                        <a href="#" id="change-username">
+                        <a id="change-username" onClick={handleClickChangeUsername}>
                             <button>Change Username</button>
                         </a>
                     </div>
@@ -49,7 +58,7 @@ const Rooms = () => {
             <main className={styles.rooms_container}>
                 <ul className={styles.rooms_list}>
                     {rooms.map(room => (
-                        <Room key={room._id} name={room.name}></Room>
+                        <Room key={room._id} name={room.name} roomId={room._id}></Room>
                     ))}
                 </ul>
             </main>

@@ -13,7 +13,7 @@ export default function Routes() {
         <Route path='/' exact component={Login} />
         <Route path='/loginAdmin' component={LoginAdmin} />
         <Route path='/rooms' component={Rooms} />
-        <Route path='/chat' component={Chat} />
+        <Route path='/chat/:roomId' component={Chat} />
       </Switch>
     </BrowserRouter>
   );
