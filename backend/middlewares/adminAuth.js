@@ -29,8 +29,6 @@ exports.newLogin = async (req, res, next) => {
     const privateKey = JSON.parse(fs.readFileSync(__dirname + '/../db/privateKey.json', 'utf8')).privateKey;
     const adminToken = jwt.sign({ login }, privateKey, { algorithm: 'HS256' });
 
-    console.log(adminToken);
-
     res.cookie('adminToken', adminToken);
     next();
 }
