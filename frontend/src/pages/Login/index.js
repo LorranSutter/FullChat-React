@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import api from '../../services/api';
 import styles from './styles.module.css'
-import { socketUserConnected } from '../../services/socket';
+import socket from '../../services/socket';
 
 const Login = () => {
 
@@ -63,7 +63,7 @@ const Login = () => {
             alert('Fail to login! Try again.');
         }
 
-        socketUserConnected(username);
+        socket.emit('connected', { username });
     }
 
     return (

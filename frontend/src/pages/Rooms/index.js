@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
-import { socketUserDisconnected } from '../../services/socket';
+import socket from '../../services/socket';
 
 import styles from './styles.module.css'
 import Room from './room';
@@ -37,7 +37,7 @@ const Rooms = () => {
     function handleClick(e) {
         e.preventDefault();
 
-        socketUserDisconnected('Username Test');
+        socket.emit('disconnected', { username: 'Username Test' });
 
         history.push('/');
     }

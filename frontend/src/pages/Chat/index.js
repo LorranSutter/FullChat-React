@@ -2,11 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
-import socket, {
-    socketUserJoinRoom,
-    socketUserLeftRoom,
-    socketUserMsg
-} from '../../services/socket';
+import socket from '../../services/socket';
 
 import styles from './styles.module.css'
 import Message from './message';
@@ -34,23 +30,25 @@ const Chat = ({ match }) => {
                     setRoomName(res.data.chatRoom.name);
                     setMsgList(res.data.msgList);
 
-                    socketUserJoinRoom('UsernameTestChat', match.params.roomId);
+                    socket.emit('joinRoom', { username: 'UsernameTestChat', room: match.params.roomId});
 
                     inputRef.current.focus();
                     chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
                 });
-            
+
             setInitialized(true);
         }
 
         socket.on('message', message => {
             setMsgList([...msgList, message]);
-            chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
+            // FIXME TypeError: Cannot read property 'scrollHeight' of null
+            // chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
         });
 
         socket.on('messageJoinLeft', message => {
             setMsgList([...msgList, message]);
-            chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
+            // FIXME TypeError: Cannot read property 'scrollHeight' of null
+            // chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
         });
 
     });
@@ -58,7 +56,7 @@ const Chat = ({ match }) => {
     function handleClick(e) {
         e.preventDefault();
 
-        socketUserLeftRoom('UserLeftChat', match.params.roomId);
+        socket.emit('leftRoom', { username: 'UserLeftChat', room: match.params.roomId });
 
         history.push('/rooms');
     }
@@ -78,7 +76,7 @@ const Chat = ({ match }) => {
                 date: new Date()
             }
 
-            socketUserMsg(data);
+            socket.emit('chatMessage', data);
 
             setInputMsg('');
             inputRef.current.focus();
