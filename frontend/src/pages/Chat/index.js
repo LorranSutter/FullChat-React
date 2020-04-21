@@ -30,6 +30,7 @@ const Chat = ({ match }) => {
                     setRoomName(res.data.chatRoom.name);
                     setMsgList(res.data.msgList);
 
+                    // TODO emit socket.io join room username
                     socket.emit('joinRoom', { username: 'UsernameTestChat', room: match.params.roomId});
 
                     inputRef.current.focus();
@@ -46,6 +47,7 @@ const Chat = ({ match }) => {
         });
 
         socket.on('messageJoinLeft', message => {
+            message['joinLeftMsg'] = true;
             setMsgList([...msgList, message]);
             // FIXME TypeError: Cannot read property 'scrollHeight' of null
             // chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
@@ -53,6 +55,7 @@ const Chat = ({ match }) => {
 
     });
 
+    // TODO emit socket.io left room username
     function handleClick(e) {
         e.preventDefault();
 
@@ -65,6 +68,7 @@ const Chat = ({ match }) => {
         setInputMsg(e.target.value);
     }
 
+    // TODO emit socket.io submit msg username
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -98,7 +102,8 @@ const Chat = ({ match }) => {
                             key={msg._id || key}
                             user={msg.user}
                             msg={msg.message}
-                            date={msg.date} >
+                            date={msg.date}
+                            joinLeftMsg={msg.joinLeftMsg} >
                         </Message>
                     ))}
                 </div>
