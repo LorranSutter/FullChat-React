@@ -48,14 +48,16 @@ const LoginAdmin = () => {
                             id="login"
                             placeholder="Login"
                             value={login}
-                            onChange={handleLoginChange} />
+                            onChange={handleLoginChange}
+                            required />
                         <input
                             type="password"
                             name="password"
                             id="password"
                             placeholder="Password"
                             value={password}
-                            onChange={handlePasswordChange} />
+                            onChange={handlePasswordChange}
+                            required />
                         <div className={styles.buttons}>
                             <a href="#">
                                 <button id="buttonLogin">

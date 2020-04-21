@@ -77,7 +77,14 @@ const Login = () => {
                         {/* TODO action="/rooms" */}
                         <form className={styles.form} onSubmit={handleSubmit}>
                             <h1>Full Chat</h1>
-                            <input type="text" name="username" id="username" placeholder="Username" value={username} onChange={handleInputChange} />
+                            <input
+                                type="text"
+                                name="username"
+                                id="username"
+                                placeholder="Username"
+                                value={username}
+                                onChange={handleInputChange}
+                                required />
                             {/* TODO href="rooms" */}
                             <a href="#">
                                 <button id="getStarted">Get Started</button>
