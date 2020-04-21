@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
+import { socketUserDisconnected } from '../../services/socket';
 
 import styles from './styles.module.css'
 import Room from './room';
@@ -14,7 +15,7 @@ const Rooms = () => {
 
     useEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
-        document.body.style.minWidth = "350px";        
+        document.body.style.minWidth = "350px";
 
         try {
             api.get('rooms', {
@@ -29,13 +30,14 @@ const Rooms = () => {
         } catch (error) {
             alert('Fail to login! Try again.');
         }
-
     }, []);
 
     // TODO emit socket.io change username
     // TODO clear cookies
     function handleClick(e) {
         e.preventDefault();
+
+        socketUserDisconnected('Username Test');
 
         history.push('/');
     }

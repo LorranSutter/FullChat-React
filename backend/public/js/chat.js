@@ -38,7 +38,7 @@ $(document).ready(() => {
         const data = {
             user: username,
             room: room,
-            msg: e.target.elements.msg.value,
+            message: e.target.elements.msg.value,
             date: new Date()
         }
 

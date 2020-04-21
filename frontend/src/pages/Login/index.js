@@ -3,9 +3,10 @@ import { Link, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 import axios from 'axios';
-import api from '../../services/api';
 
+import api from '../../services/api';
 import styles from './styles.module.css'
+import { socketUserConnected } from '../../services/socket';
 
 const Login = () => {
 
@@ -35,7 +36,9 @@ const Login = () => {
 
     // FIXME think in a better way to resize avatar image
     window.addEventListener('resize', function () {
-        setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
+        if (document.getElementById('avatarImg') !== null) {
+            setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
+        }
     });
 
     function handleInputChange(e) {
@@ -59,15 +62,9 @@ const Login = () => {
         } catch (error) {
             alert('Fail to login! Try again.');
         }
-    }
 
-    // TODO emit socket
-    // $('#getStarted').on('click', () => {
-    //     const username = $('#username').val();
-    //     if (username) {
-    //         socket.emit('connected', { username });
-    //     }
-    // });
+        socketUserConnected(username);
+    }
 
     return (
         <div className={styles.login_container}>

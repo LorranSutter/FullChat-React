@@ -189,6 +189,7 @@
 
 .chat_container .input_msg_container .chat_form button:hover {
 	transform: scale(1.05);
+	cursor: pointer;
 }
 
 @media screen and (max-width: 900px) {

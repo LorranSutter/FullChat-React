@@ -7,6 +7,7 @@ const Message = (props) => {
 
     const avatarLink = `https://avatars.dicebear.com/v2/gridy/${props.user}.svg?options[width][]=500&options[height][]=500`;
 
+    // TODO change style for left/join message
     return (
         <div className={styles.chat_msg}>
             <img src={avatarLink} alt="Avatar" />

@@ -143,11 +143,27 @@ io.on('connection', socket => {
   // Listen for chatMessage
   socket.on('chatMessage', msg => {
 
-    ioDB.historyChatCreate(msg.user, mongoose.Types.ObjectId(msg.room), msg.msg, msg.date);
+    ioDB.historyChatCreate(msg.user, mongoose.Types.ObjectId(msg.room), msg.message, msg.date);
 
     io
       .to(msg.room)
-      .emit('message', formatMessage(msg.user, msg.msg));
+      .emit('message', formatMessage(msg.user, msg.message));
+  });
+
+  socket.on('leftRoom', () => {
+    const user = userLeave(socket.id);
+
+    if (user) {
+      socket.leave(user.room);
+      ioDB.historySocketCreate(user.username, user.room, 'has left the room', Date.now())
+
+      io
+        .to(user.room)
+        .emit(
+          'messageJoinLeft',
+          formatMessage(user.username, 'has left the room')
+        );
+    }
   });
 
   // Runs when client disconnects
