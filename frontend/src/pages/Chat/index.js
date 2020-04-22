@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 import api from '../../services/api';
 import socket from '../../services/socket';
@@ -11,10 +12,14 @@ const Chat = ({ match }) => {
 
     const [initialized, setInitialized] = useState(false);
     const [roomName, setRoomName] = useState('');
+    const [username, setUsername] = useState('');
+    const [avatar, setAvatar] = useState('');
     const [msgList, setMsgList] = useState([]);
     const [inputMsg, setInputMsg] = useState('');
     const chatListContainerRef = useRef(null);
     const inputRef = useRef(null);
+
+    const [cookies, setCookie] = useCookies();
 
     const history = useHistory();
 
@@ -27,11 +32,12 @@ const Chat = ({ match }) => {
             api
                 .get(`/chat/${match.params.roomId}`)
                 .then(res => {
+                    setUsername(cookies.username)
+                    setAvatar(cookies.avatar)
                     setRoomName(res.data.chatRoom.name);
                     setMsgList(res.data.msgList);
 
-                    // TODO emit socket.io join room username
-                    socket.emit('joinRoom', { username: 'UsernameTestChat', room: match.params.roomId});
+                    socket.emit('joinRoom', { username: cookies.username, room: match.params.roomId });
 
                     inputRef.current.focus();
                     chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
@@ -42,24 +48,23 @@ const Chat = ({ match }) => {
 
         socket.on('message', message => {
             setMsgList([...msgList, message]);
-            // FIXME TypeError: Cannot read property 'scrollHeight' of null
-            // chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
         });
 
         socket.on('messageJoinLeft', message => {
             message['joinLeftMsg'] = true;
             setMsgList([...msgList, message]);
-            // FIXME TypeError: Cannot read property 'scrollHeight' of null
-            // chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
         });
 
     });
 
-    // TODO emit socket.io left room username
+    useEffect(() => {
+        chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
+    }, [msgList]);
+
     function handleClick(e) {
         e.preventDefault();
 
-        socket.emit('leftRoom', { username: 'UserLeftChat', room: match.params.roomId });
+        socket.emit('leftRoom', { username: username, room: match.params.roomId });
 
         history.push('/rooms');
     }
@@ -68,13 +73,12 @@ const Chat = ({ match }) => {
         setInputMsg(e.target.value);
     }
 
-    // TODO emit socket.io submit msg username
     function handleSubmit(e) {
         e.preventDefault();
 
         if (inputMsg) {
             const data = {
-                user: 'UserChatMsg',
+                user: username,
                 room: match.params.roomId,
                 message: inputMsg,
                 date: new Date()

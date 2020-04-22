@@ -11,7 +11,7 @@ const LoginAdmin = () => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
-    const [cookies, setCookie, removeCookie] = useCookies();
+    const [cookies, setCookie] = useCookies();
 
     const history = useHistory();
 
@@ -27,7 +27,7 @@ const LoginAdmin = () => {
         setPassword(e.target.value);
     }
 
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
 
         try {
@@ -50,7 +50,6 @@ const LoginAdmin = () => {
         <div className={styles.login_container}>
             <div className={styles.content}>
                 <div className={styles.content_items}>
-                    {/* TODO action="/admin" */}
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <h1>Admin Login</h1>
                         <input

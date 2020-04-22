@@ -16,6 +16,8 @@ const Admin = () => {
 
     useEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
+        document.body.style.minWidth = "350px";
+        document.body.style.minHeight = "475px";
 
         console.log('get request');
         console.log(cookies);

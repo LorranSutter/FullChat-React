@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 import api from '../../services/api';
 import socket from '../../services/socket';
@@ -9,7 +10,11 @@ import Room from './room';
 
 const Rooms = () => {
 
+    const [username, setUsername] = useState('');
+    const [avatar, setAvatar] = useState('');
     const [rooms, setRooms] = useState([]);
+
+    const [cookies, setCookie, removeCookie] = useCookies();
 
     const history = useHistory();
 
@@ -17,27 +22,27 @@ const Rooms = () => {
         document.body.style.backgroundColor = "#e5e5e5";
         document.body.style.minWidth = "350px";
 
+        setUsername(cookies.username);
+        setAvatar(cookies.avatar);
+
         try {
-            api.get('rooms', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-                //   'withCredentials':true
-            }).then(res => {
-                setRooms(res.data.roomsList);
-            })
+            api
+                .get('rooms')
+                .then(res => {
+                    setRooms(res.data.roomsList);
+                });
         } catch (error) {
             alert('Fail to login! Try again.');
         }
     }, []);
 
-    // TODO emit socket.io change username
-    // TODO clear cookies
     function handleClick(e) {
         e.preventDefault();
 
-        socket.emit('disconnected', { username: 'Username Test' });
+        socket.emit('disconnected', { username: username });
+
+        removeCookie('username');
+        removeCookie('avatar');
 
         history.push('/');
     }
@@ -47,13 +52,13 @@ const Rooms = () => {
             <header className={styles.header_container}>
                 <div className={styles.avatar_container}>
                     <div className={styles.username_container}>
-                        <h2>Username</h2>
+                        <h2>{username}</h2>
                         <a id="change-username" onClick={handleClick}>
                             <button>Change Username</button>
                         </a>
                     </div>
                     <div className={styles.avatar}>
-                        <img src="#" alt="avatar" id="avatarImg" />
+                        <img src={avatar} alt="avatar" id="avatarImg" />
                     </div>
                 </div>
             </header>

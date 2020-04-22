@@ -5,18 +5,18 @@ exports.index = async (req, res, next) => {
     res.send({ roomsList });
 }
 
-exports.roomsLogin = async (req, res, next) => {
-    const username = req.body.username;
-    const avatarUrl = req.body.avatarUrl;
+// exports.roomsLogin = async (req, res, next) => {
+//     const username = req.body.username;
+//     const avatarUrl = req.body.avatarUrl;
 
-    const roomsList = await room.find();
+//     const roomsList = await room.find();
 
-    res
-        .cookie('username', username, { httpOnly: true, signed: true })
-        .cookie('avatar', avatarUrl, { httpOnly: true, signed: true });
+//     res
+//         .cookie('username', username, { httpOnly: true, signed: true })
+//         .cookie('avatar', avatarUrl, { httpOnly: true, signed: true });
 
-    res.send({ roomsList });
-}
+//     res.send({ roomsList });
+// }
 
 exports.index_old = async (req, res, next) => {
     const roomsList = await room.find();

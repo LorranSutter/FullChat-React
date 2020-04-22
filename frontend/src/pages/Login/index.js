@@ -47,16 +47,19 @@ const Login = () => {
         setAvatarUrl(`https://avatars.dicebear.com/v2/gridy/${usernameInput}.svg?options[width][]=500&options[height][]=500`);
     }
 
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
 
         try {
-            const res = await api.post('rooms', { username, avatarUrl });
+            // api
+            //     .post('rooms', { username, avatarUrl })
+            //     .then(res => {
+            //         // setCookie('username', username, { path: '/' });
+            //         // setCookie('avatar', avatarUrl);
+            //     });
 
-            // setCookie('username', username, { path: '/' });
-            // setCookie('avatar', avatarUrl);
-
-            // removeCookie('username', { path: '/' });
+            setCookie('username', username);
+            setCookie('avatar', avatarUrl);
 
             history.push('/rooms');
         } catch (error) {
@@ -74,7 +77,6 @@ const Login = () => {
                         <img src={avatarUrl} style={{ height: avatarHeight, width: avatarWidth }} alt="avatar" id="avatarImg" />
                     </div>
                     <div className={styles.side_container}>
-                        {/* TODO action="/rooms" */}
                         <form className={styles.form} onSubmit={handleSubmit}>
                             <h1>Full Chat</h1>
                             <input
@@ -85,8 +87,7 @@ const Login = () => {
                                 value={username}
                                 onChange={handleInputChange}
                                 required />
-                            {/* TODO href="rooms" */}
-                            <a href="#">
+                            <a>
                                 <button id="getStarted">Get Started</button>
                             </a>
                         </form>
