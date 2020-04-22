@@ -5,7 +5,7 @@ const adminMiddleware = require('../middlewares/adminAuth');
 
 router.get('/', adminMiddleware.checkLogin, adminController.index);
 
-router.post('/', adminMiddleware.newLogin, adminController.index);
+router.post('/', adminController.newLogin);
 
 router.get('/partialHistory', adminMiddleware.checkLogin, adminController.partialHistory);
 

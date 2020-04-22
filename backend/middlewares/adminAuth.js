@@ -34,17 +34,22 @@ exports.newLogin = async (req, res, next) => {
 }
 
 exports.checkLogin = (req, res, next) => {
+    console.log('admin cookies');
+    console.log(req.cookies);
+    console.log(req.headers.cookie);
     const adminToken = req.cookies.adminToken;
 
     if (!adminToken) {
-        res.status(401).render('error', { message: 'Invalid login/password' });
+        // res.status(401).render('error', { message: 'Invalid login/password' });
+        res.status(401).send({ message: 'Invalid login/password' });
     }
 
     try {
         const privateKey = JSON.parse(fs.readFileSync(__dirname + '/../db/privateKey.json', 'utf8')).privateKey;
         jwt.verify(adminToken, privateKey);
     } catch (error) {
-        res.status(401).render('error', { message: 'Invalid login/password' });
+        // res.status(401).render('error', { message: 'Invalid login/password' });
+        res.status(401).send({ message: 'Invalid login/password' });
     }
 
     next();

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
-// import api from '../../services/api';
+import api from '../../services/api';
 
 import styles from './styles.module.css'
 
@@ -9,6 +10,10 @@ const LoginAdmin = () => {
 
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+
+    const [cookies, setCookie, removeCookie] = useCookies();
+
+    const history = useHistory();
 
     useEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
@@ -25,14 +30,20 @@ const LoginAdmin = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        // try {
-        //     const res = await api.post('admin', { login, password });
+        try {
+            api
+                .post('admin', { login, password })
+                .then(res => {
+                    setCookie('adminToken', res.data.adminToken);
+                    console.log('admin response');
+                    // console.log(res);
+                    console.log(cookies);
 
-        //     console.log('admin response');
-        //     console.log(res);
-        // } catch (error) {
-        //     alert('Fail to login! Try again.');
-        // }
+                    history.push('/admin');
+                })
+        } catch (error) {
+            alert('Fail to login! Try again.');
+        }
     }
 
     return (
@@ -59,7 +70,7 @@ const LoginAdmin = () => {
                             onChange={handlePasswordChange}
                             required />
                         <div className={styles.buttons}>
-                            <a href="#">
+                            <a>
                                 <button id="buttonLogin">
                                     Login
                                 </button>
