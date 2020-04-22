@@ -6,6 +6,7 @@ import AdminLogin from './pages/AdminLogin';
 import Admin from './pages/Admin';
 import Rooms from './pages/Rooms';
 import Chat from './pages/Chat';
+import SomethingWentWrong from './pages/Error';
 
 export default function Routes() {
   return (
@@ -18,6 +19,8 @@ export default function Routes() {
         <Route path='/admin' component={Admin} />
         <Route path='/rooms' component={Rooms} />
         <Route path='/chat/:roomId' component={Chat} />
+        <Route path='/somethingWentWrong' component={SomethingWentWrong}/>
+        <Route component={SomethingWentWrong}/>
       </Switch>
     </BrowserRouter>
   );
