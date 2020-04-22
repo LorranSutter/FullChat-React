@@ -22,6 +22,7 @@ const Chat = ({ match }) => {
 
     const history = useHistory();
 
+    // TODO Authenticate cookie user
     useEffect(() => {
         if (!initialized) {
             document.body.style.backgroundColor = "#e5e5e5";

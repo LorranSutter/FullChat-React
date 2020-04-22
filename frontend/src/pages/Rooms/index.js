@@ -18,6 +18,7 @@ const Rooms = () => {
 
     const history = useHistory();
 
+    // TODO Authenticate cookie user
     useEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
         document.body.style.minWidth = "350px";
