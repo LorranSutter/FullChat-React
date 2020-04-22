@@ -6,7 +6,7 @@ import api from '../../services/api';
 
 import styles from './styles.module.css'
 
-const LoginAdmin = () => {
+const AdminLogin = () => {
 
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
@@ -35,9 +35,6 @@ const LoginAdmin = () => {
                 .post('admin', { login, password })
                 .then(res => {
                     setCookie('adminToken', res.data.adminToken);
-                    console.log('admin response');
-                    // console.log(res);
-                    console.log(cookies);
 
                     history.push('/admin');
                 })
@@ -87,4 +84,4 @@ const LoginAdmin = () => {
     );
 }
 
-export default LoginAdmin;
+export default AdminLogin;

@@ -91,7 +91,7 @@ const Login = () => {
                                 <button id="getStarted">Get Started</button>
                             </a>
                         </form>
-                        <Link to="/loginAdmin" className={styles.admin_page}>
+                        <Link to="/admin/login" className={styles.admin_page}>
                             <button>Admin</button>
                         </Link>
                     </div>

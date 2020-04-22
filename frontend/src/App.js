@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Login from './pages/Login';
-import LoginAdmin from './pages/LoginAdmin';
-import Admin from './pages/History';
+import AdminLogin from './pages/AdminLogin';
+import Admin from './pages/Admin';
 import Rooms from './pages/Rooms';
 import Chat from './pages/Chat';
 
@@ -12,7 +12,7 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact component={Login} />
-        <Route path='/loginAdmin' component={LoginAdmin} />
+        <Route path='/admin/login' component={AdminLogin} />
         <Route path='/admin' component={Admin} />
         <Route path='/rooms' component={Rooms} />
         <Route path='/chat/:roomId' component={Chat} />

@@ -31,12 +31,12 @@ function historyChatCreate(user, room, message, date) {
     });
 }
 
-function historySocketCreate(user, room, event, date) {
+function historySocketCreate(user, room, message, date) {
     let newHistorySocket = new HistorySocket(
         {
             user,
             room,
-            event,
+            message,
             date
         }
     );

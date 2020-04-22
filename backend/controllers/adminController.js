@@ -70,12 +70,13 @@ exports.partialHistory = async (req, res, next) => {
         .populate('room')
         .sort({ 'date': -1 });
 
-    res.render('historyPartial',
-        {
-            title: 'History Partial',
-            historyList: historyList
-        }
-    );
+    res.status(200).send(historyList);
+    // res.render('historyPartial',
+    //     {
+    //         title: 'History Partial',
+    //         historyList: historyList
+    //     }
+    // );
 }
 
 
@@ -85,10 +86,11 @@ exports.socketEvents = async (req, res, next) => {
         .populate('room')
         .sort({ 'date': -1 });
 
-    res.render('socketEvents',
-        {
-            title: 'Queries',
-            historyList: historyList
-        }
-    );
+    res.status(200).send(historyList);
+    // res.render('socketEvents',
+    //     {
+    //         title: 'Queries',
+    //         historyList: historyList
+    //     }
+    // );
 }

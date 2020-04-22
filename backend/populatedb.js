@@ -134,12 +134,12 @@ function historyChatCreate(user, room, message, date, cb) {
     });
 }
 
-function historySocketCreate(user, room, event, date, cb) {
+function historySocketCreate(user, room, message, date, cb) {
     let newHistorySocket = new HistorySocket(
         {
             user,
             room,
-            event,
+            message,
             date
         }
     );
@@ -148,7 +148,7 @@ function historySocketCreate(user, room, event, date, cb) {
         if (err) {
             throw err;
         }
-        console.log('New history socket: ' + newHistorySocket.event);
+        console.log('New history socket: ' + newHistorySocket.message);
         historiesSocket.push(newHistorySocket);
         cb(null, newHistorySocket);
     });

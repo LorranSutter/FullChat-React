@@ -9,7 +9,7 @@ const historySocketSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'room'
     },
-    event: {
+    message: {
         type: String,
         required: true
     },

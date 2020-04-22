@@ -78,13 +78,15 @@
 	width: 175px;
 }
 
-.history-table {
+.history_table {
 	border-collapse: collapse;
 	width: 100%;
 }
 
-.history-table th, td {
-    padding: 0.4em;
+.history_table th, td {
+	padding: 0.4em;
+	max-width: 500px;
+	text-align: left;
 
     background-color: transparent;    
     border-bottom: 1px solid;
