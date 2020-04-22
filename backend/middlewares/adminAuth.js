@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const adminModel = require('../models/admin');
+const { privateKey } = require('../db/privateKey');
 
 exports.newLogin = async (req, res, next) => {
 
@@ -26,7 +27,6 @@ exports.newLogin = async (req, res, next) => {
         res.status(401).send({ message: 'Invalid login/password' });
     }
 
-    const privateKey = JSON.parse(fs.readFileSync(__dirname + '/../db/privateKey.json', 'utf8')).privateKey;
     const adminToken = jwt.sign({ login }, privateKey, { algorithm: 'HS256' });
 
     res.cookie('adminToken', adminToken);
@@ -45,7 +45,6 @@ exports.checkLogin = (req, res, next) => {
     }
 
     try {
-        const privateKey = JSON.parse(fs.readFileSync(__dirname + '/../db/privateKey.json', 'utf8')).privateKey;
         jwt.verify(adminToken, privateKey);
     } catch (error) {
         // res.status(401).render('error', { message: 'Invalid login/password' });

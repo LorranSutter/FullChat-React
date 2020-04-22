@@ -6,6 +6,7 @@ const room = require('../models/room');
 const adminModel = require('../models/admin');
 const HistoryChat = require('../models/HistoryChat');
 const HistorySocket = require('../models/HistorySocket');
+const { privateKey } = require('../db/privateKey');
 
 exports.index = async (req, res, next) => {
     console.log('index admin cookies');
@@ -54,7 +55,6 @@ exports.newLogin = async (req, res, next) => {
         res.status(401).send({ message: 'Invalid login/password' });
     }
 
-    const privateKey = JSON.parse(fs.readFileSync(__dirname + '/../db/privateKey.json', 'utf8')).privateKey;
     const adminToken = jwt.sign({ login }, privateKey, { algorithm: 'HS256' });
 
     res.status(200).send({ adminToken });
