@@ -13,7 +13,6 @@ const Chat = ({ match }) => {
     const [initialized, setInitialized] = useState(false);
     const [roomName, setRoomName] = useState('');
     const [username, setUsername] = useState('');
-    const [avatar, setAvatar] = useState('');
     const [msgList, setMsgList] = useState([]);
     const [inputMsg, setInputMsg] = useState('');
     const chatListContainerRef = useRef(null);
@@ -33,7 +32,6 @@ const Chat = ({ match }) => {
                 .get(`/chat/${match.params.roomId}`)
                 .then(res => {
                     setUsername(cookies.username)
-                    setAvatar(cookies.avatar)
                     setRoomName(res.data.chatRoom.name);
                     setMsgList(res.data.msgList);
 
@@ -54,7 +52,6 @@ const Chat = ({ match }) => {
             message['joinLeftMsg'] = true;
             setMsgList([...msgList, message]);
         });
-
     });
 
     useEffect(() => {
@@ -95,9 +92,7 @@ const Chat = ({ match }) => {
         <>
             <header className={styles.header_container}>
                 <h2>{roomName}</h2>
-                <a onClick={handleClick}>
-                    <button>Change Room</button>
-                </a>
+                <button onClick={handleClick}>Change Room</button>
             </header>
             <main className={styles.chat_container}>
                 <div ref={chatListContainerRef} className={styles.chat_list_container}>

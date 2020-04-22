@@ -20,12 +20,10 @@ const Room = (props) => {
                 <h2>{props.name}</h2>
             </div>
             <div className={styles.door_button_container}>
-                <a onClick={handleClick}>
-                    <button>
-                        <img src={openedDoor} alt="Get into the room" />
-                        <span className={styles.Enter}>Enter</span>
-                    </button>
-                </a>
+                <button onClick={handleClick}>
+                    <img src={openedDoor} alt="Get into the room" />
+                    <span className={styles.Enter}>Enter</span>
+                </button>
             </div>
         </li>
     );

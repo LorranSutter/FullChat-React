@@ -29,8 +29,8 @@ const HistoryChat = () => {
                 .get('/admin/partialHistory',
                     {
                         params: {
-                            user: selectedUser == 'All users' ? undefined : selectedUser,
-                            roomId: selectedRoomId == 'All rooms' ? undefined : selectedRoomId
+                            user: selectedUser === 'All users' ? undefined : selectedUser,
+                            roomId: selectedRoomId === 'All rooms' ? undefined : selectedRoomId
                         },
                         withCredentials: true
                     })
@@ -41,7 +41,7 @@ const HistoryChat = () => {
             alert('Fail to request! Try again.');
         }
 
-    }, [selectedUser, selectedRoom]);
+    }, [selectedUser, selectedRoom, selectedRoomId]);
 
     function handleChangeRoom(e) {
         const selectedRoomIndex = e.target.options.selectedIndex;

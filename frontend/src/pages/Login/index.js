@@ -4,7 +4,6 @@ import { useCookies } from 'react-cookie';
 
 import axios from 'axios';
 
-import api from '../../services/api';
 import styles from './styles.module.css'
 import socket from '../../services/socket';
 
@@ -51,13 +50,6 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            // api
-            //     .post('rooms', { username, avatarUrl })
-            //     .then(res => {
-            //         // setCookie('username', username, { path: '/' });
-            //         // setCookie('avatar', avatarUrl);
-            //     });
-
             setCookie('username', username);
             setCookie('avatar', avatarUrl);
 
@@ -87,9 +79,7 @@ const Login = () => {
                                 value={username}
                                 onChange={handleInputChange}
                                 required />
-                            <a>
-                                <button id="getStarted">Get Started</button>
-                            </a>
+                            <button id="getStarted">Get Started</button>
                         </form>
                         <Link to="/admin/login" className={styles.admin_page}>
                             <button>Admin</button>

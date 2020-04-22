@@ -53,9 +53,7 @@ const Rooms = () => {
                 <div className={styles.avatar_container}>
                     <div className={styles.username_container}>
                         <h2>{username}</h2>
-                        <a id="change-username" onClick={handleClick}>
-                            <button>Change Username</button>
-                        </a>
+                        <button id="change-username" onClick={handleClick}>Change Username</button>
                     </div>
                     <div className={styles.avatar}>
                         <img src={avatar} alt="avatar" id="avatarImg" />
