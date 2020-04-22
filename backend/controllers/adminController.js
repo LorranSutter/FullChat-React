@@ -8,9 +8,6 @@ const HistorySocket = require('../models/HistorySocket');
 const { privateKey } = require('../db/privateKey');
 
 exports.index = async (req, res, next) => {
-    console.log('index admin cookies');
-    console.log(req.cookies);
-    console.log(req.headers);
     const roomList = await room.find();
     const historyList = await HistoryChat
         .find()
@@ -21,15 +18,6 @@ exports.index = async (req, res, next) => {
     userList = [...new Set(userList)].sort()
 
     res.send({ roomList, userList, historyList })
-
-    // res.render('admin',
-    //     {
-    //         title: 'Admin',
-    //         roomList: roomList,
-    //         userList: userList,
-    //         historyList: historyList
-    //     }
-    // );
 }
 
 exports.newLogin = async (req, res, next) => {
@@ -38,19 +26,16 @@ exports.newLogin = async (req, res, next) => {
     const password = req.body.password;
 
     if (!login || !password) {
-        // res.status(401).render('error', { message: 'Invalid login/password' });
         res.status(401).send({ message: 'Invalid login/password' });
     }
 
     const admin = await adminModel.findOne({ login });
-    if (!admin) {
-        // res.status(401).render('error', { message: 'Invalid login/password' });
+    if (!admin) {        
         res.status(401).send({ message: 'Invalid login/password' });
     }
 
     const isMatch = await bcrypt.compare(password, admin.password);
     if (!isMatch) {
-        // res.status(401).render('error', { message: 'Invalid login/password' });
         res.status(401).send({ message: 'Invalid login/password' });
     }
 
@@ -71,12 +56,6 @@ exports.partialHistory = async (req, res, next) => {
         .sort({ 'date': -1 });
 
     res.status(200).send(historyList);
-    // res.render('historyPartial',
-    //     {
-    //         title: 'History Partial',
-    //         historyList: historyList
-    //     }
-    // );
 }
 
 
@@ -87,10 +66,4 @@ exports.socketEvents = async (req, res, next) => {
         .sort({ 'date': -1 });
 
     res.status(200).send(historyList);
-    // res.render('socketEvents',
-    //     {
-    //         title: 'Queries',
-    //         historyList: historyList
-    //     }
-    // );
 }
