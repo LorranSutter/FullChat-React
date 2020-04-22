@@ -22,14 +22,24 @@ const Login = () => {
         document.body.style.backgroundColor = "#49289e";
         document.body.style.margin = "0";
 
-        axios.get('https://randomuser.me/api/?inc=login')
+        axios
+            .get('https://randomuser.me/api/?inc=login')
             .then(res => {
-                const usernameAPI = res.data.results[0].login.username;
+                if (res.status === 200) {
+                    const usernameAPI = res.data.results[0].login.username;
 
-                setUsername(usernameAPI);
-                setAvatarUrl(`https://avatars.dicebear.com/v2/gridy/${usernameAPI}.svg?options[width][]=500&options[height][]=500`);
+                    setUsername(usernameAPI);
+                    setAvatarUrl(`https://avatars.dicebear.com/v2/gridy/${usernameAPI}.svg?options[width][]=500&options[height][]=500`);
 
-                setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
+                    setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
+                } else {
+                    const error = new Error(res.error);
+                    throw error;
+                }
+            })
+            .catch(err => {
+                const error = new Error(err);
+                throw error;
             });
 
     }, []);

@@ -13,7 +13,16 @@ const HistorySocket = () => {
             api
                 .get('/admin/socketEvents', { withCredentials: true })
                 .then(res => {
-                    setHistoryList(res.data);
+                    if (res.status === 200) {
+                        setHistoryList(res.data);
+                    } else {
+                        const error = new Error(res.error);
+                        throw error;
+                    }
+                })
+                .catch(err => {
+                    const error = new Error(err);
+                    throw error;
                 });
         } catch (error) {
             alert('Fail to request! Try again.');

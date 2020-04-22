@@ -24,6 +24,15 @@ const Chat = ({ match }) => {
 
     // TODO Authenticate cookie user
     useEffect(() => {
+
+        console.log('here2');
+        console.log(cookies)
+        console.log(cookies)
+        // if (!cookies.username || !cookies.avatar) {
+        //     history.push('/');
+        //     // return function cleanup() { }
+        // }
+
         if (!initialized) {
             document.body.style.backgroundColor = "#e5e5e5";
             document.body.style.minWidth = "350px";
@@ -33,14 +42,23 @@ const Chat = ({ match }) => {
             api
                 .get(`/chat/${match.params.roomId}`)
                 .then(res => {
-                    setUsername(cookies.username)
-                    setRoomName(res.data.chatRoom.name);
-                    setMsgList(res.data.msgList);
+                    if (res.status === 200) {
+                        setUsername(cookies.username)
+                        setRoomName(res.data.chatRoom.name);
+                        setMsgList(res.data.msgList);
 
-                    socket.emit('joinRoom', { username: cookies.username, room: match.params.roomId });
+                        socket.emit('joinRoom', { username: cookies.username, room: match.params.roomId });
 
-                    inputRef.current.focus();
-                    chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
+                        inputRef.current.focus();
+                        chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
+                    } else {
+                        const error = new Error(res.error);
+                        throw error;
+                    }
+                })
+                .catch(err => {
+                    const error = new Error(err);
+                    throw error;
                 });
 
             setInitialized(true);

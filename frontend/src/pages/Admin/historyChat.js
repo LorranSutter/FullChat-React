@@ -17,9 +17,17 @@ const HistoryChat = () => {
         api
             .get('admin', { withCredentials: true })
             .then((res) => {
-                setUserList(res.data.userList);
-                setRoomList(res.data.roomList);
-                setHistoryList(res.data.historyList);
+                if (res.status === 200) {
+                    setUserList(res.data.userList);
+                    setRoomList(res.data.roomList);
+                } else {
+                    const error = new Error(res.error);
+                    throw error;
+                }
+            })
+            .catch(err => {
+                const error = new Error(err);
+                throw error;
             });
     }, []);
 
@@ -35,7 +43,16 @@ const HistoryChat = () => {
                         withCredentials: true
                     })
                 .then(res => {
-                    setHistoryList(res.data);
+                    if (res.status === 200) {
+                        setHistoryList(res.data);
+                    } else {
+                        const error = new Error(res.error);
+                        throw error;
+                    }
+                })
+                .catch(err => {
+                    const error = new Error(err);
+                    throw error;
                 });
         } catch (error) {
             alert('Fail to request! Try again.');

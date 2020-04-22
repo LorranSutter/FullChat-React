@@ -24,6 +24,11 @@ const Rooms = () => {
         document.body.style.minWidth = "350px";
         document.body.style.margin = "0";
 
+        if (!cookies.username || !cookies.avatar) {
+            history.push('/');
+            return function cleanup() { }
+        }
+
         setUsername(cookies.username);
         setAvatar(cookies.avatar);
 
@@ -31,7 +36,16 @@ const Rooms = () => {
             api
                 .get('rooms')
                 .then(res => {
-                    setRooms(res.data.roomsList);
+                    if (res.status === 200) {
+                        setRooms(res.data.roomsList);
+                    } else {
+                        const error = new Error(res.error);
+                        throw error;
+                    }
+                })
+                .catch(err => {
+                    const error = new Error(err);
+                    throw error;
                 });
         } catch (error) {
             alert('Fail to login! Try again.');

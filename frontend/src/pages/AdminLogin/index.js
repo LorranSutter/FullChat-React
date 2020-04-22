@@ -35,10 +35,19 @@ const AdminLogin = () => {
             api
                 .post('admin', { login, password })
                 .then(res => {
-                    setCookie('adminToken', res.data.adminToken);
+                    if (res.status === 200) {
+                        setCookie('adminToken', res.data.adminToken);
 
-                    history.push('/admin');
+                        history.push('/admin');
+                    } else {
+                        const error = new Error(res.error);
+                        throw error;
+                    }
                 })
+                .catch(err => {
+                    const error = new Error(err);
+                    throw error;
+                });
         } catch (error) {
             alert('Fail to login! Try again.');
         }
