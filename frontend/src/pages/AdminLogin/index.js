@@ -17,6 +17,7 @@ const AdminLogin = () => {
 
     useEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
+        document.body.style.margin = "0";
     }, []);
 
     function handleLoginChange(e) {

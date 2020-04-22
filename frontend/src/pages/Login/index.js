@@ -20,6 +20,7 @@ const Login = () => {
 
     useEffect(() => {
         document.body.style.backgroundColor = "#49289e";
+        document.body.style.margin = "0";
 
         axios.get('https://randomuser.me/api/?inc=login')
             .then(res => {

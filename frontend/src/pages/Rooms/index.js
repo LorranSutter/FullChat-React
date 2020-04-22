@@ -21,6 +21,7 @@ const Rooms = () => {
     useEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
         document.body.style.minWidth = "350px";
+        document.body.style.margin = "0";
 
         setUsername(cookies.username);
         setAvatar(cookies.avatar);
