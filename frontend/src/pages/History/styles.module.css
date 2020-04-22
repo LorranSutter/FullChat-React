@@ -1,14 +1,5 @@
 @import url("../../global.css");
 
-body {
-	background-color: #e5e5e5;
-	min-width: 350px;
-	min-height: 475px;
-	font-family: Roboto;
-
-	margin: 2em 3em;
-}
-
 .header_container {
 	display: flex;
 	align-items: center;
@@ -99,10 +90,4 @@ body {
     border-bottom: 1px solid;
     border-color: rgba(235, 25, 92, 0.50);
     outline: none;
-}
-
-@media screen and (max-width: 1200px) {
-	body {
-		margin: 2em 1em;
-	}
 }
