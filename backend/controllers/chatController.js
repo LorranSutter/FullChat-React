@@ -10,15 +10,5 @@ exports.index = async (req, res, next) => {
         { _id: -1, user: 1, room: -1, message: 1, date: 1 }
     ).sort({ 'date': 1 });
 
-    res.cookie('roomId', req.params.roomId);
-
     res.send({ chatRoom, msgList });
-
-    // res.render('chat',
-    //     {
-    //         title: 'Chat',
-    //         room: chatRoom,
-    //         msgList: msgList
-    //     }
-    // );
 }
