@@ -27,6 +27,7 @@ const Chat = ({ match }) => {
             document.body.style.backgroundColor = "#e5e5e5";
             document.body.style.minWidth = "350px";
             document.body.style.minHeight = "475px";
+            document.body.style.margin = "0";
 
             api
                 .get(`/chat/${match.params.roomId}`)
