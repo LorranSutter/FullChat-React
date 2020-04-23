@@ -18,7 +18,7 @@ const Admin = () => {
     useEffect(() => {
 
         if (!cookies.adminToken) {
-            history.push('/somethingWenWrong');
+            history.push('/somethingWentWrong');
             return function cleanup() {}
         }
 

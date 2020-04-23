@@ -22,16 +22,12 @@ const Chat = ({ match }) => {
 
     const history = useHistory();
 
-    // TODO Authenticate cookie user
     useEffect(() => {
 
-        console.log('here2');
-        console.log(cookies)
-        console.log(cookies)
-        // if (!cookies.username || !cookies.avatar) {
-        //     history.push('/');
-        //     // return function cleanup() { }
-        // }
+        if (!cookies.username || !cookies.avatar) {
+            history.push('/somethingWentWrong');
+            return function cleanup() { }
+        }
 
         if (!initialized) {
             document.body.style.backgroundColor = "#e5e5e5";
