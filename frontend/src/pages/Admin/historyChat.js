@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 import styles from './styles.module.css';
@@ -13,6 +14,8 @@ const HistoryChat = () => {
     const [selectedRoom, setSelectedRoom] = useState('All rooms');
     const [selectedRoomId, setSelectedRoomId] = useState(null);
 
+    const history = useHistory()
+
     useEffect(() => {
         api
             .get('admin', { withCredentials: true })
@@ -21,13 +24,13 @@ const HistoryChat = () => {
                     setUserList(res.data.userList);
                     setRoomList(res.data.roomList);
                 } else {
-                    const error = new Error(res.error);
-                    throw error;
+                    history.push('/somethingWentWrong');
+                    return function cleanup() { }
                 }
             })
             .catch(err => {
-                const error = new Error(err);
-                throw error;
+                history.push('/somethingWentWrong');
+                return function cleanup() { }
             });
     }, []);
 
@@ -46,13 +49,13 @@ const HistoryChat = () => {
                     if (res.status === 200) {
                         setHistoryList(res.data);
                     } else {
-                        const error = new Error(res.error);
-                        throw error;
+                        history.push('/somethingWentWrong');
+                        return function cleanup() { }
                     }
                 })
                 .catch(err => {
-                    const error = new Error(err);
-                    throw error;
+                    history.push('/somethingWentWrong');
+                    return function cleanup() { }
                 });
         } catch (error) {
             alert('Fail to request! Try again.');

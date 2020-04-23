@@ -38,13 +38,13 @@ const Rooms = () => {
                     if (res.status === 200) {
                         setRooms(res.data.roomsList);
                     } else {
-                        const error = new Error(res.error);
-                        throw error;
+                        history.push('/somethingWentWrong');
+                        return function cleanup() { }
                     }
                 })
                 .catch(err => {
-                    const error = new Error(err);
-                    throw error;
+                    history.push('/somethingWentWrong');
+                    return function cleanup() { }
                 });
         } catch (error) {
             alert('Fail to login! Try again.');

@@ -33,13 +33,13 @@ const Login = () => {
 
                     setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
                 } else {
-                    const error = new Error(res.error);
-                    throw error;
+                    history.push('/somethingWentWrong');
+                    return function cleanup() { }
                 }
             })
             .catch(err => {
-                const error = new Error(err);
-                throw error;
+                history.push('/somethingWentWrong');
+                return function cleanup() { }
             });
 
     }, []);

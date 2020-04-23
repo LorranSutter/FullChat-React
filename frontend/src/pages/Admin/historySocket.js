@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 import styles from './styles.module.css';
@@ -8,6 +9,8 @@ import HistoryTable from './historyTable';
 const HistorySocket = () => {
     const [historyList, setHistoryList] = useState([]);
 
+    const history = useHistory();
+
     useEffect(() => {
         try {
             api
@@ -16,13 +19,13 @@ const HistorySocket = () => {
                     if (res.status === 200) {
                         setHistoryList(res.data);
                     } else {
-                        const error = new Error(res.error);
-                        throw error;
+                        history.push('/somethingWentWrong');
+                        return function cleanup() { }
                     }
                 })
                 .catch(err => {
-                    const error = new Error(err);
-                    throw error;
+                    history.push('/somethingWentWrong');
+                    return function cleanup() { }
                 });
         } catch (error) {
             alert('Fail to request! Try again.');

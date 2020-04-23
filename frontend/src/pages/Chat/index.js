@@ -48,13 +48,13 @@ const Chat = ({ match }) => {
                         inputRef.current.focus();
                         chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
                     } else {
-                        const error = new Error(res.error);
-                        throw error;
+                        history.push('/somethingWentWrong');
+                        return function cleanup() { }
                     }
                 })
                 .catch(err => {
-                    const error = new Error(err);
-                    throw error;
+                    history.push('/somethingWentWrong');
+                    return function cleanup() { }
                 });
 
             setInitialized(true);
