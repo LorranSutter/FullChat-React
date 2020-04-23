@@ -25,7 +25,7 @@ const Chat = ({ match }) => {
     useEffect(() => {
 
         if (!cookies.username || !cookies.avatar) {
-            history.push('/somethingWentWrong');
+            history.push('/somethingWentWrong', { message: 'You must choose your user name first' });
             return function cleanup() { }
         }
 

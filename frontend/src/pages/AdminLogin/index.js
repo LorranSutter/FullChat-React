@@ -40,12 +40,12 @@ const AdminLogin = () => {
 
                         history.push('/admin');
                     } else {
-                        history.push('/somethingWentWrong');
+                        history.push('/somethingWentWrong', { message: 'Invalid login/password' });
                         return function cleanup() { }
                     }
                 })
-                .catch(err => {
-                    history.push('/somethingWentWrong');
+                .catch(() => {
+                    history.push('/somethingWentWrong', { message: 'Invalid login/password' });
                     return function cleanup() { }
                 });
         } catch (error) {
