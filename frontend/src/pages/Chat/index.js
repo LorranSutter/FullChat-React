@@ -55,6 +55,10 @@ const Chat = ({ match }) => {
             setInitialized(true);
         }
 
+        // FIXME Fix message history update
+        // Socket is set everytime component loads because it is implemented in useEffect
+        // If we initialize socket.on only once (useEffect(()=>{},[])) new msgs will be listen only once
+        // But msgList state will be always empty. So, when we have a new msg, only this new msg will be displayed
         socket.on('message', message => {
             setMsgList([...msgList, message]);
         });
