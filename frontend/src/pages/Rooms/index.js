@@ -43,7 +43,7 @@ const Rooms = () => {
                     }
                 })
                 .catch(err => {
-                    history.push('/somethingWentWrong');
+                    history.push('/somethingWentWrong', { 'message': err });
                     return function cleanup() { }
                 });
         } catch (error) {

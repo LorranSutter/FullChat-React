@@ -29,7 +29,7 @@ const HistoryChat = () => {
                 }
             })
             .catch(err => {
-                history.push('/somethingWentWrong');
+                history.push('/somethingWentWrong', { 'message': err });
                 return function cleanup() { }
             });
     }, []);
@@ -54,7 +54,7 @@ const HistoryChat = () => {
                     }
                 })
                 .catch(err => {
-                    history.push('/somethingWentWrong');
+                    history.push('/somethingWentWrong', { 'message': err });
                     return function cleanup() { }
                 });
         } catch (error) {

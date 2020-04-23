@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
@@ -53,7 +53,7 @@ const Chat = ({ match }) => {
                     }
                 })
                 .catch(err => {
-                    history.push('/somethingWentWrong');
+                    history.push('/somethingWentWrong', { 'message': err });
                     return function cleanup() { }
                 });
 
@@ -70,7 +70,7 @@ const Chat = ({ match }) => {
         });
     });
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
     }, [msgList]);
 
