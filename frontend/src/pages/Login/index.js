@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
@@ -19,9 +19,6 @@ const Login = () => {
     const history = useHistory();
 
     useEffect(() => {
-        document.body.style.backgroundColor = "#49289e";
-        document.body.style.margin = "0";
-
         axios
             .get('https://randomuser.me/api/?inc=login')
             .then(res => {
@@ -30,18 +27,23 @@ const Login = () => {
 
                     setUsername(usernameAPI);
                     setAvatarUrl(`https://avatars.dicebear.com/v2/gridy/${usernameAPI}.svg?options[width][]=500&options[height][]=500`);
-
-                    setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
+                    
                 } else {
                     history.push('/somethingWentWrong');
                     return function cleanup() { }
                 }
             })
             .catch(err => {
-                history.push('/somethingWentWrong');
+                history.push('/somethingWentWrong', { 'message': err });
                 return function cleanup() { }
             });
 
+    }, []);
+
+    useLayoutEffect(() => {
+        document.body.style.backgroundColor = "#49289e";
+        document.body.style.margin = "0";
+        setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
     }, []);
 
     // FIXME think in a better way to resize avatar image

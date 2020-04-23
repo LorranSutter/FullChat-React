@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import styles from './styles.module.css';
@@ -15,6 +15,11 @@ const SomethingWentWrong = (props) => {
     } else {
         message = 'Something Went Wrong'
     }
+
+    useLayoutEffect(() => {
+        document.body.style.backgroundColor = "#e5e5e5";
+        document.body.style.margin = "0";
+    }, []);
 
     function handleClick(e) {
         history.push('/');

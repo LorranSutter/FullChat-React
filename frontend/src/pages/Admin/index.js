@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
 
@@ -19,16 +19,18 @@ const Admin = () => {
 
         if (!cookies.adminToken) {
             history.push('/somethingWentWrong');
-            return function cleanup() {}
+            return function cleanup() { }
         }
 
+        setHistoryTableDisplayed(<HistoryChat></HistoryChat>);
+
+    }, []);
+
+    useLayoutEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
         document.body.style.minWidth = "350px";
         document.body.style.minHeight = "475px";
         document.body.style.margin = "2em 3em";
-
-        setHistoryTableDisplayed(<HistoryChat></HistoryChat>);
-
     }, []);
 
     // TODO improve, because it is ugly

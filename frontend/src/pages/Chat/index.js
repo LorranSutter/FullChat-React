@@ -30,11 +30,6 @@ const Chat = ({ match }) => {
         }
 
         if (!initialized) {
-            document.body.style.backgroundColor = "#e5e5e5";
-            document.body.style.minWidth = "350px";
-            document.body.style.minHeight = "475px";
-            document.body.style.margin = "0";
-
             api
                 .get(`/chat/${match.params.roomId}`)
                 .then(res => {
@@ -69,6 +64,13 @@ const Chat = ({ match }) => {
             setMsgList([...msgList, message]);
         });
     });
+
+    useLayoutEffect(() => {
+        document.body.style.backgroundColor = "#e5e5e5";
+        document.body.style.minWidth = "350px";
+        document.body.style.minHeight = "475px";
+        document.body.style.margin = "0";
+    }, []);
 
     useLayoutEffect(() => {
         chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;

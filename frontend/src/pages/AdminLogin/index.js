@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
@@ -15,7 +15,7 @@ const AdminLogin = () => {
 
     const history = useHistory();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
         document.body.style.margin = "0";
     }, []);
