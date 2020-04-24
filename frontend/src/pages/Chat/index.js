@@ -10,7 +10,6 @@ import Message from './message';
 
 const Chat = ({ match }) => {
 
-    const [initialized, setInitialized] = useState(false);
     const [roomName, setRoomName] = useState('');
     const [username, setUsername] = useState('');
     const [msgList, setMsgList] = useState([]);
@@ -29,41 +28,36 @@ const Chat = ({ match }) => {
             return function cleanup() { }
         }
 
-        if (!initialized) {
-            api
-                .get(`/chat/${match.params.roomId}`)
-                .then(res => {
-                    if (res.status === 200) {
-                        setUsername(cookies.username)
-                        setRoomName(res.data.chatRoom.name);
-                        setMsgList(res.data.msgList);
+        api
+            .get(`/chat/${match.params.roomId}`)
+            .then(res => {
+                if (res.status === 200) {
+                    setUsername(cookies.username)
+                    setRoomName(res.data.chatRoom.name);
+                    setMsgList(res.data.msgList);
 
-                        socket.emit('joinRoom', { username: cookies.username, room: match.params.roomId });
+                    socket.emit('joinRoom', { username: cookies.username, room: match.params.roomId });
 
-                        inputRef.current.focus();
-                        chatListContainerRef.current.scrollTop = chatListContainerRef.current.scrollHeight;
-                    } else {
-                        history.push('/somethingWentWrong');
-                        return function cleanup() { }
-                    }
-                })
-                .catch(err => {
-                    history.push('/somethingWentWrong', { 'message': err });
+                    inputRef.current.focus();
+                } else {
+                    history.push('/somethingWentWrong');
                     return function cleanup() { }
-                });
-
-            setInitialized(true);
-        }
+                }
+            })
+            .catch(err => {
+                history.push('/somethingWentWrong', { 'message': err });
+                return function cleanup() { }
+            });
 
         socket.on('message', message => {
-            setMsgList([...msgList, message]);
+            setMsgList(msgList => [...msgList, message]);
         });
 
         socket.on('messageJoinLeft', message => {
             message['joinLeftMsg'] = true;
-            setMsgList([...msgList, message]);
+            setMsgList(msgList => [...msgList, message]);
         });
-    });
+    }, []);
 
     useLayoutEffect(() => {
         document.body.style.backgroundColor = "#e5e5e5";
