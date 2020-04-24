@@ -6,3 +6,5 @@ Final Assignment for BCDV1017
 - [Token Authentication](https://stormpath.com/blog/token-authentication-scalable-user-mgmt)
 - [Chat example](https://medium.com/dataseries/how-to-build-a-chat-app-with-react-socket-io-and-express-190d927b7002)
     - [Repo](https://bitbucket.org/hauyeung/react-chat-tutorial-app/src/master/)
+- [JavaScript Mastery video](https://www.youtube.com/watch?v=ZwFA3YMfkoc)
+    - [Repo](https://github.com/adrianhajdin/project_chat_application)
