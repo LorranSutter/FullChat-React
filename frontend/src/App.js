@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Login from './pages/Login';
 import AdminLogin from './pages/AdminLogin';
@@ -8,7 +8,24 @@ import Rooms from './pages/Rooms';
 import Chat from './pages/Chat';
 import SomethingWentWrong from './pages/Error';
 
-export default function Routes() {
+import { isAuth } from './auth';
+
+// TODO Use authentication with redirect
+const PrivateRoute = ({ component: Component, ...remaing }) => (
+  <Route
+    {...remaing}
+    render={props =>
+      isAuth() ?
+        (
+          <Component {...props} />
+        ) : (
+          <Redirect to='/somethingWentWrong' />
+        )
+    }
+  />
+);
+
+export default function App() {
   return (
     <BrowserRouter>
       <Switch>
@@ -19,8 +36,8 @@ export default function Routes() {
         <Route path='/admin' component={Admin} />
         <Route path='/rooms' component={Rooms} />
         <Route path='/chat/:roomId' component={Chat} />
-        <Route path='/somethingWentWrong' component={SomethingWentWrong}/>
-        <Route component={SomethingWentWrong}/>
+        <Route path='/somethingWentWrong' component={SomethingWentWrong} />
+        <Route component={SomethingWentWrong} />
       </Switch>
     </BrowserRouter>
   );
