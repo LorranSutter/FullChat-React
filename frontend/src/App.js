@@ -11,6 +11,7 @@ import SomethingWentWrong from './pages/Error';
 import { isAuth } from './auth';
 
 // TODO Use authentication with redirect
+// https://www.youtube.com/watch?v=sYe4r8WXGQg&t=627s
 const PrivateRoute = ({ component: Component, ...remaing }) => (
   <Route
     {...remaing}
@@ -25,6 +26,9 @@ const PrivateRoute = ({ component: Component, ...remaing }) => (
   />
 );
 
+// TODO use Redux or Context API to make cookies available to all components
+// I will help in auth
+// https://www.youtube.com/watch?v=oDgxUodLwGU
 export default function App() {
   return (
     <BrowserRouter>
