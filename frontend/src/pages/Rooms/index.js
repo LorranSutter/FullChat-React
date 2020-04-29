@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
@@ -19,10 +19,6 @@ const Rooms = () => {
     const history = useHistory();
 
     useEffect(() => {
-        document.body.style.backgroundColor = "#e5e5e5";
-        document.body.style.minWidth = "350px";
-        document.body.style.margin = "0";
-
         if (!cookies.username || !cookies.avatar) {
             history.push('/somethingWentWrong', { message: 'You must choose your user name first' });
             return function cleanup() { }
@@ -49,6 +45,12 @@ const Rooms = () => {
         } catch (error) {
             alert('Fail to login! Try again.');
         }
+    }, []);
+
+    useLayoutEffect(() => {
+        document.body.style.backgroundColor = "#e5e5e5";
+        document.body.style.minWidth = "350px";
+        document.body.style.margin = "0";
     }, []);
 
     function handleClick(e) {

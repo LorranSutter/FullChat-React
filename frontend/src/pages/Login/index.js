@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
@@ -13,6 +13,8 @@ const Login = () => {
     const [avatarUrl, setAvatarUrl] = useState('');
     const [avatarHeight] = useState('100%');
     const [avatarWidth, setAvatarWidth] = useState(100);
+
+    const avatarRef = useRef();
 
     const [cookies, setCookie] = useCookies();
 
@@ -41,7 +43,7 @@ const Login = () => {
         // FIXME think in a better way to resize avatar image
         const handleResize = () => {
             if (document.getElementById('avatarImg') !== null) {
-                setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
+                setAvatarWidth(avatarRef.current.height * 1.25);
             }
         };
 
@@ -54,7 +56,7 @@ const Login = () => {
     useLayoutEffect(() => {
         document.body.style.backgroundColor = "#49289e";
         document.body.style.margin = "0";
-        setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
+        setAvatarWidth(avatarRef.current.height * 1.25);
     }, []);
 
     function handleInputChange(e) {
@@ -83,7 +85,7 @@ const Login = () => {
             <div className={styles.content}>
                 <div className={styles.content_items}>
                     <div className={styles.avatar}>
-                        <img src={avatarUrl} style={{ height: avatarHeight, width: avatarWidth }} alt="avatar" id="avatarImg" />
+                        <img ref={avatarRef} src={avatarUrl} style={{ height: avatarHeight, width: avatarWidth }} alt="avatar" id="avatarImg" />
                     </div>
                     <div className={styles.side_container}>
                         <form className={styles.form} onSubmit={handleSubmit}>
