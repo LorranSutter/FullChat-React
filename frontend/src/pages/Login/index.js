@@ -27,7 +27,7 @@ const Login = () => {
 
                     setUsername(usernameAPI);
                     setAvatarUrl(`https://avatars.dicebear.com/v2/gridy/${usernameAPI}.svg?options[width][]=500&options[height][]=500`);
-                    
+
                 } else {
                     history.push('/somethingWentWrong');
                     return function cleanup() { }
@@ -38,6 +38,17 @@ const Login = () => {
                 return function cleanup() { }
             });
 
+        // FIXME think in a better way to resize avatar image
+        const handleResize = () => {
+            if (document.getElementById('avatarImg') !== null) {
+                setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+
     }, []);
 
     useLayoutEffect(() => {
@@ -45,13 +56,6 @@ const Login = () => {
         document.body.style.margin = "0";
         setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
     }, []);
-
-    // FIXME think in a better way to resize avatar image
-    window.addEventListener('resize', function () {
-        if (document.getElementById('avatarImg') !== null) {
-            setAvatarWidth(document.getElementById('avatarImg').height * 1.25);
-        }
-    });
 
     function handleInputChange(e) {
         const usernameInput = e.target.value;
