@@ -3,8 +3,8 @@ import moment from 'moment';
 
 import styles from './styles.module.css';
 
-const Message = (props) => {
-
+const Message = React.memo((props) => {
+    
     let msgOutput;
 
     if (props.joinLeftMsg) {
@@ -36,6 +36,6 @@ const Message = (props) => {
         { msgOutput }
         </>
     );
-}
+})
 
 export default Message;

@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import styles from './styles.module.css';
 
-const HistoryTable = (props) => {
+const HistoryTable = React.memo((props) => {
     return (
         <table className={styles.history_table}>
             <thead>
@@ -26,6 +26,6 @@ const HistoryTable = (props) => {
             </tbody>
         </table>
     );
-}
+})
 
 export default HistoryTable;
