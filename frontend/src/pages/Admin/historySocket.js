@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 import HistoryTable from './historyTable';
 
-const HistorySocket = () => {
+const HistorySocket = React.memo(() => {
     const [historyList, setHistoryList] = useState([]);
 
     const history = useHistory();
@@ -40,6 +40,6 @@ const HistorySocket = () => {
             </div>
         </main>
     );
-}
+})
 
 export default HistorySocket;
