@@ -40,13 +40,11 @@ app.use('/rooms', roomsRouter);
 app.use('/chat', chatRouter);
 app.use('/admin', adminRouter);
 
-// TODO handle 404 with frontend
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// TODO handle errors with frontend
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development

@@ -30,7 +30,7 @@ exports.newLogin = async (req, res, next) => {
     }
 
     const admin = await adminModel.findOne({ login });
-    if (!admin) {        
+    if (!admin) {
         res.status(401).send({ message: 'Invalid login/password' });
     }
 
@@ -45,6 +45,25 @@ exports.newLogin = async (req, res, next) => {
 }
 
 exports.partialHistory = async (req, res, next) => {
+
+    let { page = 0 } = req.query;
+    let skip = page < 0 ? 0 : page * 10;
+
+    const countHistoryList = await HistoryChat
+        .find({
+            $and: [
+                req.query.user ? { "user": req.query.user } : {},
+                req.query.roomId ? { "room": req.query.roomId } : {}
+            ]
+        })
+        .countDocuments();
+
+    if (countHistoryList < 10) {
+        skip = 0
+    } else if (countHistoryList <= skip) {
+        skip = countHistoryList - 10;
+    }
+
     const historyList = await HistoryChat
         .find({
             $and: [
@@ -52,18 +71,36 @@ exports.partialHistory = async (req, res, next) => {
                 req.query.roomId ? { "room": req.query.roomId } : {}
             ]
         })
+        .skip(skip)
+        .limit(10)
         .populate('room')
         .sort({ 'date': -1 });
 
-    res.status(200).send(historyList);
+    res.status(200).send({ countHistoryList, historyList });
 }
 
 
 exports.socketEvents = async (req, res, next) => {
+
+    let { page = 0 } = req.query;
+    let skip = page < 0 ? 0 : page * 10;
+
+    const countHistoryList = await HistorySocket
+        .find()
+        .countDocuments();
+
+    if (countHistoryList < 10) {
+        skip = 0
+    } else if (countHistoryList <= skip) {
+        skip = countHistoryList - 10;
+    }
+
     const historyList = await HistorySocket
         .find()
+        .skip(skip)
+        .limit(10)
         .populate('room')
         .sort({ 'date': -1 });
 
-    res.status(200).send(historyList);
+    res.status(200).send({ countHistoryList, historyList });
 }
