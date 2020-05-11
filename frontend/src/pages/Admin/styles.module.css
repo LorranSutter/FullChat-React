@@ -79,7 +79,8 @@
 	width: 175px;
 }
 
-.history_container .room_filter span {
+.history_container span {
+	float: right;
 	margin-left: auto;
 	font-weight: bold;
 	font-style: italic;

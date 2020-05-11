@@ -76,15 +76,22 @@ const HistoryChat = () => {
         setSelectedRoom(e.target.value);
     }
 
-    function handlePagination(diff) {
-        if (diff === -1) {
+    function handlePagination(command) {
+        if (command === -1) {
             if (page > 0) {
                 setPage(page => page - 1);
             }
-        } else {
-            // TODO fix for the last page
-            if (page * 10 < countResults) {
+        } else if (command === 1) {
+            if ((page + 1) * 10 < countResults) {
                 setPage(page => page + 1);
+            }
+        } else if (command === 'first') {
+            setPage(0);
+        } else if (command === 'last') {
+            if (countResults % 10 === 0) {
+                setPage(parseInt(countResults / 10) - 1);
+            } else {
+                setPage(parseInt(countResults / 10));
             }
         }
     }

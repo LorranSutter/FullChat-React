@@ -81,10 +81,26 @@ exports.partialHistory = async (req, res, next) => {
 
 
 exports.socketEvents = async (req, res, next) => {
+
+    let { page = 0 } = req.query;
+    let skip = page < 0 ? 0 : page * 10;
+
+    const countHistoryList = await HistorySocket
+        .find()
+        .countDocuments();
+
+    if (countHistoryList < 10) {
+        skip = 0
+    } else if (countHistoryList <= skip) {
+        skip = countHistoryList - 10;
+    }
+
     const historyList = await HistorySocket
         .find()
+        .skip(skip)
+        .limit(10)
         .populate('room')
         .sort({ 'date': -1 });
 
-    res.status(200).send(historyList);
+    res.status(200).send({ countHistoryList, historyList });
 }
