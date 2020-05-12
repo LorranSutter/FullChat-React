@@ -103,6 +103,13 @@ cd frontend
 npm start
 ```
 
+If you want to use your own mongodb account, replace the following variable with your own mongo URL:
+
+```sh
+# Go to backend/db/config.js
+MONGOURI = <your-url>
+```
+
 ## :book: Resources and technologies :computer:
 
 1. Resources
