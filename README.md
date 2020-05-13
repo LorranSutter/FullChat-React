@@ -113,7 +113,6 @@ MONGOURI = <your-url>
 Then you may populate your database using the following command:
 
 ```sh
-
 cd backend
 
 node populatedb.js
