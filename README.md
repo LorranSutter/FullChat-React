@@ -12,8 +12,10 @@
 
 <p align="center">
     <a href='#straight_ruler-Development-pipeline-and-challenges'>Development and challenges</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a href="#runner-how-to-run">How to run</a>&nbsp;&nbsp;|&nbsp;&nbsp;    
-    <a href="#book-Resources-and-technologies-computer">Resources and technologies</a>
+    <a href="#runner-how-to-run">How to run</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="#book-Resources">Resources</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="#computer-Technologies">Technologies</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="#cookie-Credits">Credits</a>
 </p>
  
 <div align="center">
@@ -118,29 +120,31 @@ cd backend
 node populatedb.js
 ```
 
-## :book: Resources and technologies :computer:
+## :book: Resources
 
-1. Resources
-    - [React auth](https://medium.com/@faizanv/authentication-for-your-react-and-express-application-w-json-web-tokens-923515826e0#beb6)
-    - [Token Authentication](https://stormpath.com/blog/token-authentication-scalable-user-mgmt)
-    - [Chat example](https://medium.com/dataseries/how-to-build-a-chat-app-with-react-socket-io-and-express-190d927b7002)
-        - [Repo](https://bitbucket.org/hauyeung/react-chat-tutorial-app/src/master/)
-    - [JavaScript Mastery video](https://www.youtube.com/watch?v=ZwFA3YMfkoc)
-        - [Repo](https://github.com/adrianhajdin/project_chat_application)
-    - [Figma](https://www.figma.com/)
-    - [Scrimba](https://scrimba.com/)
-    - [Learn React Hooks](https://scrimba.com/course/greacthooks)
+- [React auth](https://medium.com/@faizanv/authentication-for-your-react-and-express-application-w-json-web-tokens-923515826e0#beb6) - understanding JWT with React and Express
+- [Token Authentication](https://stormpath.com/blog/token-authentication-scalable-user-mgmt) - understanding JWT
+- [Figma](https://www.figma.com/) - digital design and prototyping tool
+- [Scrimba](https://scrimba.com/) - platform for learning how to code
+- [Learn React Hooks](https://scrimba.com/course/greacthooks) - scrimba course
 
-2. Technologies
-    - [React](https://reactjs.org/)
-    - [React navigation](https://reactnavigation.org/)
-    - [React Icons](https://www.npmjs.com/package/react-icons)
-    - [React-cookie](https://www.npmjs.com/package/react-cookie)
-    - [JWT](https://jwt.io/)
-    - [ExpressJS](http://expressjs.com/)
-    - [Moment](https://momentjs.com/)
-    - [Mongoose](https://mongoosejs.com/)
-    - [Socket.IO](https://socket.io/)
-    - [Async](https://caolan.github.io/async/v3/)
-    - [ESlint](https://eslint.org/)
-    - [Nodemon](https://www.npmjs.com/package/nodemon)
+## :computer: Technologies
+
+- [ReactJS](https://reactjs.org/) - frontend library
+- [React navigation](https://reactnavigation.org/) - routing and navigation for react apps
+- [React Icons](https://www.npmjs.com/package/react-icons) - icons library
+- [React-cookie](https://www.npmjs.com/package/react-cookie) - cookie interaction for React applications
+- [JWT.IO](https://jwt.io/) - JSON Web Tokens to allow, decode, verify and generate JWT
+- [Express.js](http://expressjs.com/) - web application framework
+- [Moment.js](https://momentjs.com/) - parsing, validating, manipulating and displaying dates and times
+- [Mongoose](https://mongoosejs.com/) - object data modeling (ODM) library for MongoDB and Node.js
+- [Socket.IO](https://socket.io/) - real time engine using web sockers
+- [Async](https://caolan.github.io/async/v3/) - library to perform asynchronous operations
+- [ESlint](https://eslint.org/) - pluggable JS linter
+- [Nodemon](https://www.npmjs.com/package/nodemon) - monitor and restart server after changes
+
+## :cookie: Credits
+- [Chat example](https://medium.com/dataseries/how-to-build-a-chat-app-with-react-socket-io-and-express-190d927b7002)
+    - [Repo](https://bitbucket.org/hauyeung/react-chat-tutorial-app/src/master/)
+- [JavaScript Mastery video](https://www.youtube.com/watch?v=ZwFA3YMfkoc)
+    - [Repo](https://github.com/adrianhajdin/project_chat_application)
